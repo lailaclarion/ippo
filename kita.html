@@ -124,16 +124,16 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    // --- 1. CONFIG FIREBASE (GANTI PAKAI PUNYAMU) ---
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
     const firebaseConfig = {
-        apiKey: "AIzaSy...",
-        authDomain: "ippo-ippo.firebaseapp.com",
-        databaseURL: "https://ippo-ippo-default-rtdb.firebaseio.com",
-        projectId: "ippo-ippo",
-        storageBucket: "ippo-ippo.appspot.com",
-        messagingSenderId: "123456789",
-        appId: "1:12345:web:abcde"
-    };
+  apiKey: "AIzaSyCr196DGOJzUzIk132tkDXXfU6YqHZWrkg",
+  authDomain: "ippo-d3c38.firebaseapp.com",
+  projectId: "ippo-d3c38",
+  storageBucket: "ippo-d3c38.firebasestorage.app",
+  messagingSenderId: "496287634511",
+  appId: "1:496287634511:web:cc079d7bc32b7b8153c63a"
+};
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
