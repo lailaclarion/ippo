@@ -4,329 +4,368 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPPO IPPO | The Marauders of 2017</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+DW+Pica+SC&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Dancing+Script:wght@600&family=IM+Fell+DW+Pica&family=Space+Mono&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         :root {
-            --magic-gold: #d4af37;
+            --gold: #d4af37;
             --wizard-dark: #1a1714;
             --parchment: #f4e4bc;
             --gryffindor: #740001;
+            --magic-blue: #a2d2ff;
         }
 
+        /* --- Global Style --- */
         body {
             margin: 0;
             background-color: var(--wizard-dark);
             background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+            font-family: 'IM Fell DW Pica', serif;
             color: #3e2b14;
-            font-family: 'IM Fell DW Pica SC', serif;
-            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Section - Great Hall */
         header {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('https://images.unsplash.com/photo-1551269901-5c5e14c25df7?q=80&w=2069') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--magic-gold);
-            border-bottom: 5px double var(--magic-gold);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: var(--gold); border-bottom: 5px double var(--gold);
         }
 
-        header h1 {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 5rem;
-            margin: 0;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
-        }
+        header h1 { font-family: 'Cinzel Decorative'; font-size: clamp(3rem, 10vw, 6rem); margin: 0; text-shadow: 0 0 20px rgba(212,175,55,0.6); }
+        header p { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; }
 
-        header p {
-            font-size: 1.5rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        /* Parchment Container */
-        .main-content {
+        .main-container {
+            max-width: 1100px; margin: -80px auto 50px; padding: 40px;
             background: url('https://www.transparenttextures.com/patterns/paper.png'), var(--parchment);
-            max-width: 1000px;
-            margin: -50px auto 50px;
-            padding: 50px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            border-radius: 5px;
-            position: relative;
-            border: 20px solid transparent;
+            box-shadow: 0 0 100px rgba(0,0,0,0.8); border-radius: 8px;
+            border: 15px solid transparent;
             border-image: url('https://www.transparenttextures.com/patterns/ornamental-border.png') 30 stretch;
         }
 
         .section-title {
-            font-family: 'Cinzel Decorative', cursive;
-            text-align: center;
-            font-size: 2.5rem;
-            border-bottom: 2px solid var(--gryffindor);
-            padding-bottom: 10px;
-            margin-bottom: 40px;
+            font-family: 'Cinzel Decorative'; text-align: center; font-size: 2.5rem;
+            color: var(--gryffindor); border-bottom: 3px double var(--gryffindor);
+            padding-bottom: 15px; margin: 60px 0 40px;
         }
 
-        /* Order Members - Portraits */
+        /* --- Member Flip Cards (SMA to Now) --- */
         .member-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
         }
 
-        .portrait-frame {
-            text-align: center;
-            padding: 15px;
-            border: 10px solid #222;
-            border-image: url('https://img.freepik.com/free-vector/golden-frame-ornament_1017-5421.jpg') 30 stretch;
-            background: #fff;
-            transition: transform 0.3s;
+        .flip-card { perspective: 1000px; height: 520px; cursor: pointer; }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%; text-align: center;
+            transition: transform 0.8s; transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+
+        .card-face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border: 12px solid #222; border-image: url('https://img.freepik.com/free-vector/golden-frame-ornament_1017-5421.jpg') 30 stretch;
+            background: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; box-sizing: border-box;
         }
 
-        .portrait-frame:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 0 20px var(--magic-gold);
-        }
-
-        .portrait-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            filter: sepia(0.5) contrast(1.1);
-        }
-
-        .member-info h3 { margin: 10px 0 5px; font-family: 'Cinzel Decorative'; }
-        .member-info p { margin: 0; font-style: italic; font-size: 0.9rem; color: var(--gryffindor); }
-
-        /* Pensieve (Timeline) */
-        .pensieve-box {
-            background: rgba(162, 210, 255, 0.1);
-            border: 2px solid #a2d2ff;
-            padding: 30px;
-            border-radius: 50% 50% 10px 10px;
-            text-align: center;
-            margin-bottom: 60px;
-            box-shadow: inset 0 0 20px #a2d2ff;
-        }
-
-        /* Locked Letters - Envelopes */
-        .envelope-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-
-        .envelope {
-            background: #e0d5b9;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            border: 1px solid #c4b694;
-            position: relative;
-            transition: 0.3s;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .envelope:hover { transform: translateY(-5px); background: #f0e6cc; }
+        .card-back { transform: rotateY(180deg); background: #fffdf2; }
         
+        .member-img { width: 90%; height: 280px; object-fit: cover; filter: sepia(0.3) contrast(1.1); border: 2px solid #ddd; }
+        .member-info h3 { font-family: 'Cinzel Decorative'; margin: 15px 0 5px; color: var(--gryffindor); }
+        .member-role { font-family: 'Space Mono'; font-size: 0.8rem; background: #eee; padding: 2px 10px; border-radius: 5px; }
+        .member-stats { width: 100%; font-size: 0.8rem; text-align: left; margin-top: 10px; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 5px; }
+
+        /* --- Secret Owl Post (Letters) --- */
+        .letter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .envelope {
+            background: #e0d5b9; height: 130px; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; cursor: pointer; border: 1px solid #c4b694; position: relative; transition: 0.3s;
+        }
+        .envelope:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .seal {
-            width: 40px;
-            height: 40px;
-            background: var(--gryffindor);
-            border-radius: 50%;
-            position: absolute;
-            bottom: -15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--magic-gold);
-            font-weight: bold;
-            box-shadow: 0 0 5px black;
+            width: 45px; height: 45px; background: var(--gryffindor); border-radius: 50%;
+            position: absolute; bottom: -20px; display: flex; justify-content: center; align-items: center;
+            color: var(--gold); font-weight: bold; border: 2px solid var(--gold);
         }
 
-        /* Overlay */
+        /* --- Mini Game (Dice) --- */
+        .dice-game {
+            background: rgba(116, 0, 1, 0.05); border: 2px dashed var(--gryffindor);
+            padding: 40px; border-radius: 20px; text-align: center; margin-top: 50px;
+        }
+        #dice { font-size: 100px; display: inline-block; cursor: pointer; transition: 0.5s; }
+        .rolling { animation: magic-shake 0.5s infinite; }
+        @keyframes magic-shake { 0% { transform: translate(2px, 2px) rotate(0deg); } 50% { transform: translate(-2px, -2px) rotate(15deg); } 100% { transform: translate(2px, 2px) rotate(0deg); } }
+        
+        #tod-result { font-family: 'Dancing Script'; font-size: 2rem; color: var(--gryffindor); min-height: 80px; margin-top: 20px; }
+
+        /* --- Buttons & UI --- */
+        .btn-magic {
+            background: var(--gryffindor); color: var(--gold); border: 2px solid var(--gold);
+            padding: 10px 25px; font-family: 'Cinzel Decorative'; cursor: pointer; margin-top: 15px; font-size: 0.8rem;
+        }
+        .btn-magic:hover { background: var(--gold); color: var(--gryffindor); }
+
         .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            display: none; justify-content: center; align-items: center; z-index: 999; backdrop-filter: blur(8px);
         }
-
         .parchment-letter {
             background: url('https://www.transparenttextures.com/patterns/old-map.png'), #fdf5e6;
-            padding: 50px;
-            max-width: 500px;
-            width: 80%;
-            border-radius: 2px;
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            box-shadow: 0 0 30px white;
-            position: relative;
+            padding: 60px; max-width: 600px; width: 85%; border-radius: 2px;
+            font-family: 'Dancing Script', cursive; font-size: 2rem; box-shadow: 0 0 50px white; position: relative;
         }
+        .close-btn { position: absolute; top: 20px; right: 20px; cursor: pointer; color: var(--gryffindor); font-weight: bold; }
 
-        .close-spell {
-            position: absolute;
-            top: 10px; right: 10px;
-            cursor: pointer;
-            font-family: serif;
-            font-size: 0.8rem;
-            color: var(--gryffindor);
-        }
-
-        footer {
-            text-align: center;
-            color: var(--magic-gold);
-            padding: 40px;
-            font-family: 'Cinzel Decorative';
-        }
+        footer { text-align: center; color: var(--gold); padding: 60px; font-family: 'Cinzel Decorative'; font-size: 0.9rem; opacity: 0.8; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>IPPO IPPO</h1>
-        <p>Mischief Managed Since 2017</p>
-    </header>
+<header>
+    <h1>IPPO IPPO</h1>
+    <p>The Marauders of 2017 - Present</p>
+</header>
 
-    <div class="main-content">
-        <h2 class="section-title">The Order of Ippo Ippo</h2>
+<div class="main-container">
+    
+    <h2 class="section-title">The Order of Ippo Ippo</h2>
+    <div class="member-grid">
         
-        <div class="member-grid">
-            <div class="portrait-frame">
-                <img src="https://via.placeholder.com/200?text=Firo" alt="Firo" class="portrait-img">
-                <div class="member-info">
-                    <h3>Firo</h3>
-                    <p>The Seeker: Master Strategy</p>
+        <div class="flip-card" id="card-semsem">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="https://via.placeholder.com/300x400?text=SemSem+2017" class="member-img">
+                    <div class="member-info">
+                        <h3>Sem Sem</h3>
+                        <span class="member-role">The Matriarch (2017)</span>
+                    </div>
                 </div>
-            </div>
-            <div class="portrait-frame">
-                <img src="https://via.placeholder.com/200?text=Sem+Sem" alt="Sem Sem" class="portrait-img">
-                <div class="member-info">
-                    <h3>Sem Sem</h3>
-                    <p>The Chaser: Eternal Sunshine</p>
-                </div>
-            </div>
-            <div class="portrait-frame">
-                <img src="https://via.placeholder.com/200?text=Tembem" alt="Tembem" class="portrait-img">
-                <div class="member-info">
-                    <h3>Tembem</h3>
-                    <p>The Beater: Heart of Group</p>
-                </div>
-            </div>
-            <div class="portrait-frame">
-                <img src="https://via.placeholder.com/200?text=Fafa" alt="Fafa" class="portrait-img">
-                <div class="member-info">
-                    <h3>Fafa</h3>
-                    <p>The Keeper: Wild Card</p>
-                </div>
-            </div>
-            <div class="portrait-frame">
-                <img src="https://via.placeholder.com/200?text=Raka" alt="Raka" class="portrait-img">
-                <div class="member-info">
-                    <h3>Raka</h3>
-                    <p>The Head Boy: Silent Strength</p>
-                </div>
-            </div>
-            <div class="portrait-frame">
-                <img src="https://via.placeholder.com/200?text=Setar" alt="Setar" class="portrait-img">
-                <div class="member-info">
-                    <h3>Setar</h3>
-                    <p>The Prefect: Shining Star</p>
+                <div class="card-face card-back">
+                    <img src="https://via.placeholder.com/300x400?text=SemSem+2026" class="member-img">
+                    <div class="member-stats">
+                        <b>Power:</b> Sabar (100%), Emosi (50%)<br>
+                        <b>Trait:</b> Pemersatu Ippo, Sipit Magic.
+                    </div>
+                    <button class="btn-magic" onclick="downloadID('card-semsem', 'SemSem')">Unduh Kartu Sihir</button>
                 </div>
             </div>
         </div>
 
-        <h2 class="section-title">Pensieve of Memories</h2>
-        <div class="pensieve-box">
-            <p>"Melihat kembali ke tahun 2017, saat sihir persahabatan kita dimulai..."</p>
-            <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
-                <div style="text-align: center;">
-                    <img src="https://via.placeholder.com/150?text=HighSchool+2017" style="border: 3px solid #666; width: 120px;">
-                    <p>2017</p>
+        <div class="flip-card" id="card-tembem">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="https://via.placeholder.com/300x400?text=Tembem+2017" class="member-img">
+                    <div class="member-info">
+                        <h3>Tembem</h3>
+                        <span class="member-role">The Gaming Pixie</span>
+                    </div>
                 </div>
-                <div style="font-size: 2rem;">⚡</div>
-                <div style="text-align: center;">
-                    <img src="https://via.placeholder.com/150?text=Present+2026" style="border: 3px solid var(--magic-gold); width: 120px;">
-                    <p>2026</p>
+                <div class="card-face card-back">
+                    <img src="https://via.placeholder.com/300x400?text=Tembem+2026" class="member-img">
+                    <div class="member-stats">
+                        <b>Power:</b> Gaming (100%), Imut (99%)<br>
+                        <b>Trait:</b> Putih, Susah Diajak Kumpul.
+                    </div>
+                    <button class="btn-magic" onclick="downloadID('card-tembem', 'Tembem')">Unduh Kartu Sihir</button>
                 </div>
             </div>
         </div>
 
-        <h2 class="section-title">Secret Owl Post</h2>
-        <div class="envelope-grid">
-            <div class="envelope" onclick="unlock('Firo', 'firo123')">
-                <small>For Firo's Eyes Only</small>
-                <div class="seal">H</div>
-            </div>
-            <div class="envelope" onclick="unlock('Sem Sem', 'semsem123')">
-                <small>For Sem's Eyes Only</small>
-                <div class="seal">H</div>
-            </div>
-            <div class="envelope" onclick="unlock('Tembem', 'tembem123')">
-                <small>For Tembem's Eyes Only</small>
-                <div class="seal">H</div>
-            </div>
-            <div class="envelope" onclick="unlock('Fafa', 'fafa123')">
-                <small>For Fafa's Eyes Only</small>
-                <div class="seal">H</div>
-            </div>
-            <div class="envelope" onclick="unlock('Raka', 'raka123')">
-                <small>For Raka's Eyes Only</small>
-                <div class="seal">H</div>
-            </div>
-            <div class="envelope" onclick="unlock('Setar', 'setar123')">
-                <small>For Setar's Eyes Only</small>
-                <div class="seal">H</div>
+        <div class="flip-card" id="card-itul">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="https://via.placeholder.com/300x400?text=Itul+2017" class="member-img">
+                    <div class="member-info">
+                        <h3>Itul</h3>
+                        <span class="member-role">The Hufflepuff</span>
+                    </div>
+                </div>
+                <div class="card-face card-back">
+                    <img src="https://via.placeholder.com/300x400?text=Itul+2026" class="member-img">
+                    <div class="member-stats">
+                        <b>Power:</b> Kalem (90%), Lemot (100%)<br>
+                        <b>Trait:</b> Unik, Tinggi, Nurutan.
+                    </div>
+                    <button class="btn-magic" onclick="downloadID('card-itul', 'Itul')">Unduh Kartu Sihir</button>
+                </div>
             </div>
         </div>
+
+        <div class="flip-card" id="card-fafa">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="https://via.placeholder.com/300x400?text=Fafa+2017" class="member-img">
+                    <div class="member-info">
+                        <h3>Fafa</h3>
+                        <span class="member-role">The Chaotic Moderator</span>
+                    </div>
+                </div>
+                <div class="card-face card-back">
+                    <img src="https://via.placeholder.com/300x400?text=Fafa+2026" class="member-img">
+                    <div class="member-stats">
+                        <b>Power:</b> Bertanya (100%), Seru (95%)<br>
+                        <b>Trait:</b> Pony Mail, Putih, Asik.
+                    </div>
+                    <button class="btn-magic" onclick="downloadID('card-fafa', 'Fafa')">Unduh Kartu Sihir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" id="card-setar">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="https://via.placeholder.com/300x400?text=Setar+2017" class="member-img">
+                    <div class="member-info">
+                        <h3>Setar</h3>
+                        <span class="member-role">The Dragon Boss</span>
+                    </div>
+                </div>
+                <div class="card-face card-back">
+                    <img src="https://via.placeholder.com/300x400?text=Setar+2026" class="member-img">
+                    <div class="member-stats">
+                        <b>Power:</b> Ngambek (100%), Kekar (90%)<br>
+                        <b>Trait:</b> Anak Bos, Serius, Putih Tinggi.
+                    </div>
+                    <button class="btn-magic" onclick="downloadID('card-setar', 'Setar')">Unduh Kartu Sihir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" id="card-raka">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="https://via.placeholder.com/300x400?text=Raka+2017" class="member-img">
+                    <div class="member-info">
+                        <h3>Raka</h3>
+                        <span class="member-role">The Golden Snitch</span>
+                    </div>
+                </div>
+                <div class="card-face card-back">
+                    <img src="https://via.placeholder.com/300x400?text=Raka+2026" class="member-img">
+                    <div class="member-stats">
+                        <b>Power:</b> Cerewet (100%), Humble (95%)<br>
+                        <b>Trait:</b> Hitam Manis, Raksasa Ippo.
+                    </div>
+                    <button class="btn-magic" onclick="downloadID('card-raka', 'Raka')">Unduh Kartu Sihir</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div id="overlay" class="overlay">
-        <div class="parchment-letter">
-            <span class="close-spell" onclick="closeLetter()">[Klik untuk Membakar Surat]</span>
-            <p id="letter-content"></p>
-            <p style="text-align: right;">- Ippo Ippo Marauders</p>
-        </div>
+    <h2 class="section-title">The Dice of Fate (Mini Game)</h2>
+    <div class="dice-game">
+        <div id="dice">🎲</div><br>
+        <button class="btn-magic" onclick="rollDice()">KOCAK DADU SIHIR!</button>
+        <div id="tod-result">Ketuk dadu untuk mulai bercerita...</div>
     </div>
 
-    <footer>
-        <p>Solemnly Swear That We Are Up To No Good</p>
-    </footer>
+    <h2 class="section-title">Secret Owl Post (Locked)</h2>
+    <div class="letter-grid">
+        <div class="envelope" onclick="openLetter('Sem Sem', 'semsem123')"><small>For Sem Sem</small><div class="seal">H</div></div>
+        <div class="envelope" onclick="openLetter('Tembem', 'tembem123')"><small>For Tembem</small><div class="seal">H</div></div>
+        <div class="envelope" onclick="openLetter('Itul', 'itul123')"><small>For Itul</small><div class="seal">H</div></div>
+        <div class="envelope" onclick="openLetter('Fafa', 'fafa123')"><small>For Fafa</small><div class="seal">H</div></div>
+        <div class="envelope" onclick="openLetter('Setar', 'setar123')"><small>For Setar</small><div class="seal">H</div></div>
+        <div class="envelope" onclick="openLetter('Raka', 'raka123')"><small>For Raka</small><div class="seal">H</div></div>
+    </div>
 
-    <script>
-        const scrollOfSecrets = {
-            'Firo': 'Dear Firo, The Seeker. Strategi kamu menjaga geng ini tetap satu sejak 2017 adalah sihir yang paling hebat.',
-            'Sem Sem': 'Sem Sem, cahaya Astronomi kita. Teruslah bersinar dan membawa tawa ke Aula Besar Ippo Ippo.',
-            'Tembem': 'Buat Tembem, sang Beater. Kekuatan hati kamu yang melindungi kita dari mantra-mantra kesepian.',
-            'Fafa': 'Fafa, The Wild Card. Selalu ada ramuan kejutan yang kamu buat di setiap pertemuan kita.',
-            'Raka': 'Raka, Head Boy kita. Ketenanganmu adalah mantra pelindung bagi Ippo Ippo.',
-            'Setar': 'Setar, The Prefect. Nama kamu terukir di piala persahabatan abadi Ippo Ippo.'
-        };
+</div>
 
-        function unlock(name, pass) {
-            const input = prompt("Ucapkan Mantra (Password) untuk membuka segel:");
-            if(input === pass) {
-                document.getElementById('letter-content').innerText = scrollOfSecrets[name];
-                document.getElementById('overlay').style.display = 'flex';
-            } else {
-                alert("Mantra Salah! Surat ini akan meledak dalam 3 detik!");
-            }
+<div id="letter-overlay" class="overlay">
+    <div class="parchment-letter">
+        <span class="close-btn" onclick="closeOverlay()">[BAKAR SURAT INI]</span>
+        <p id="letter-text"></p>
+        <p style="text-align: right; font-size: 1.2rem;">- Marauders of Ippo -</p>
+    </div>
+</div>
+
+<footer>
+    <p>Solemnly Swear That We Are Up To No Good | Ippo Ippo 2017 - 2026</p>
+</footer>
+
+<script>
+    // --- Data Surat Howler ---
+    const howlers = {
+        'Sem Sem': 'SEM SEM!!! Ibu asrama kami yang paling sabar menghadapi kegilaan Ippo. Matamu yang sipit itu adalah saksi perjalanan kita sejak 2017!',
+        'Tembem': 'TEMBEM!!! Si paling Gaming! Berhenti bersembunyi di dunia virtual dan kumpullah bersama kami para manusia nyata!',
+        'Itul': 'ITUL!!! Wahai Hufflepuff yang unik. Teruslah kalem meski lemotmu bikin kami pengen minum Ramuan Penguat Otak!',
+        'Fafa': 'FAFA!!! Moderator paling cerewet dan seru. Pony Mail-mu adalah tren paling legendaris di Hogwarts!',
+        'Setar': 'SETAR!!! Tuan Muda Bos Ippo! Berhenti ngambek atau kami akan mengubahmu menjadi kodok cokelat!',
+        'Raka': 'RAKA!!! Raksasa Ippo yang paling muda tapi cerewetnya minta ampun. Hitam manis tetaplah humble!'
+    };
+
+    // --- Data Game Truth or Dare ---
+    const todBank = [
+        "[Truth] Apa hal yang paling bikin kangen pas zaman SMA 2017?",
+        "[Truth] Sebutkan satu rahasia masa lalu yang belum pernah diceritakan ke Ippo!",
+        "[Truth] Siapa di sini yang menurutmu masa depannya paling nggak terduga?",
+        "[Dare] Tunjukkan chat terakhirmu di grup Ippo Ippo!",
+        "[Dare] Peragakan gaya ngomong anggota Ippo di sebelah kananmu!",
+        "[Dare] Ceritakan satu impian gila yang ingin kamu capai bareng geng ini!",
+        "[Truth] Apa momen paling memalukan pas kita lagi nongkrong di sekolah?"
+    ];
+
+    // --- Fungsi Game Dadu ---
+    let diceRolling = false;
+    function rollDice() {
+        if (diceRolling) return;
+        diceRolling = true;
+        const dice = document.getElementById('dice');
+        const res = document.getElementById('tod-result');
+        dice.classList.add('rolling');
+        
+        let rollCounter = 0;
+        const rollInt = setInterval(() => {
+            res.innerText = todBank[Math.floor(Math.random() * todBank.length)];
+            rollCounter++;
+        }, 80);
+
+        setTimeout(() => {
+            clearInterval(rollInt);
+            dice.classList.remove('rolling');
+            const final = Math.floor(Math.random() * 6) + 1;
+            const faces = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+            dice.innerText = faces[final-1];
+            diceRolling = false;
+        }, 1500);
+    }
+
+    // --- Fungsi Surat Rahasia ---
+    function openLetter(name, pass) {
+        const input = prompt(`Ucapkan Mantra (Password) untuk surat ${name}:`);
+        if (input === pass) {
+            document.getElementById('letter-text').innerText = howlers[name];
+            document.getElementById('letter-overlay').style.display = 'flex';
+        } else if (input !== null) {
+            alert("Mantra Salah! Surat akan meledak!");
         }
+    }
 
-        function closeLetter() {
-            document.getElementById('overlay').style.display = 'none';
-        }
-    </script>
+    function closeOverlay() {
+        document.getElementById('letter-overlay').style.display = 'none';
+    }
+
+    // --- Fungsi Download Kartu ---
+    function downloadID(elementId, memberName) {
+        const card = document.getElementById(elementId);
+        // Putar ke sisi belakang dulu agar yang difoto adalah sisi 2026
+        card.querySelector('.flip-card-inner').style.transform = 'rotateY(180deg)';
+        
+        setTimeout(() => {
+            html2canvas(card, { backgroundColor: null }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `IppoIppo_Card_${memberName}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }, 500);
+    }
+</script>
+
 </body>
 </html>
