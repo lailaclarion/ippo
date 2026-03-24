@@ -43,23 +43,26 @@
 
         header {
             height: 100vh;
-            background: linear-gradient(rgba(255, 192, 214, 0.4), rgba(225, 190, 231, 0.4)), 
+            background: linear-gradient(rgba(255, 105, 180, 0.3), rgba(225, 190, 231, 0.3)), 
                         url('metdes/bg.jpg') center/cover no-repeat;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; color: var(--deep-pink); border-bottom: 8px solid var(--princess-pink);
+            text-align: center; border-bottom: 8px solid var(--princess-pink);
             position: relative;
         }
         header h1 { 
             font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 10vw, 8rem); margin: 0; 
-            text-shadow: 3px 3px 0px white, 6px 6px 20px rgba(255, 105, 180, 0.5);
+            color: var(--deep-pink);
+            text-shadow: 3px 3px 0px white, 0 0 30px rgba(255, 255, 255, 0.8);
             animation: float 3s ease-in-out infinite;
         }
+        .subtitle { color: white; font-size: 1.5rem; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); font-weight: bold; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
         .main-container {
             max-width: 1200px; margin: -50px auto 50px; padding: 40px;
-            background: white; box-shadow: 0 0 50px rgba(255, 105, 180, 0.2); 
+            background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 50px rgba(255, 105, 180, 0.2); 
             border-radius: 50px; border: 10px solid var(--princess-pink); position: relative;
+            backdrop-filter: blur(5px);
         }
 
         .section-title {
@@ -68,8 +71,8 @@
             display: flex; align-items: center; justify-content: center;
         }
 
-        /* --- 3D Magic Book --- */
-        .book-container { perspective: 1500px; display: flex; justify-content: center; margin: 50px 0; }
+        /* --- 3D Magic Book with Password --- */
+        .book-container { perspective: 1500px; display: flex; flex-direction: column; align-items: center; margin: 50px 0; }
         .book {
             width: 300px; height: 400px; position: relative; transform-style: preserve-3d;
             transition: transform 1.5s; cursor: pointer;
@@ -82,56 +85,79 @@
         .book-cover {
             background: var(--book-brown); color: gold; display: flex; flex-direction: column;
             justify-content: center; align-items: center; border: 5px solid #5d4037; z-index: 2;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
         }
-        .book-cover .lock { font-size: 50px; margin-top: 20px; }
+        .book-cover .lock { font-size: 50px; margin-top: 20px; transition: 0.3s; }
         .book-page {
             background: #fff9f0; transform: rotateY(180deg); padding: 20px;
             text-align: center; border: 1px solid #ddd; z-index: 1;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.1);
         }
-        .book-page img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        .book-page img { width: 100%; border-radius: 10px; margin-bottom: 15px; border: 3px solid var(--princess-pink); }
+        .pw-input { margin-top: 20px; padding: 10px; border-radius: 20px; border: 2px solid var(--deep-pink); text-align: center; outline: none; }
 
-        /* --- Member Cards --- */
+        /* --- Member Cards with Ornaments --- */
         .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .flip-card { perspective: 1000px; height: 550px; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
         .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        
         .card-face {
             position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
             border-radius: 30px; border: 8px solid var(--princess-pink); background: #fff;
             display: flex; flex-direction: column; align-items: center; padding: 20px;
+            overflow: hidden;
         }
-        .card-back { transform: rotateY(180deg); background: var(--royal-purple); color: white; border-color: var(--deep-pink); }
-        .member-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid var(--princess-pink); }
-
-        /* --- Spin the Bottle --- */
-        .bottle-area { text-align: center; padding: 50px; background: #fff5f8; border-radius: 40px; border: 3px dashed var(--deep-pink); margin: 40px 0; }
-        #bottle-container { width: 200px; height: 200px; margin: 0 auto 30px; position: relative; }
-        #bottle { width: 60px; height: 160px; background: #a5d6a7; border-radius: 30px 30px 10px 10px; position: relative; margin: 0 auto; transition: transform 3s cubic-bezier(0.1, 0.5, 0.1, 1); border: 4px solid #2e7d32; }
-        #bottle::after { content: ''; position: absolute; top: -10px; left: 15px; width: 22px; height: 10px; background: #2e7d32; border-radius: 5px; }
+        /* Ornaments */
+        .card-face::before { content: '🎀'; position: absolute; top: 10px; left: 10px; font-size: 2rem; }
+        .card-face::after { content: '🌸'; position: absolute; bottom: 10px; right: 10px; font-size: 2rem; }
         
-        .sticky-note { width: 220px; min-height: 200px; padding: 20px; border-radius: 20px; font-family: 'Dancing Script'; font-size: 1.4rem; background: #fff9c4; border: 2px solid rgba(255, 105, 180, 0.2); }
-        .btn-royal { background: var(--deep-pink); color: white; border: none; padding: 12px 30px; font-family: 'Playfair Display'; border-radius: 50px; cursor: pointer; transition: 0.3s; margin: 5px; }
-        .btn-royal:hover { transform: scale(1.05); background: #ff1493; }
+        .card-back { transform: rotateY(180deg); background: var(--royal-purple); color: white; border-color: var(--deep-pink); }
+        .member-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid var(--princess-pink); box-shadow: 0 0 15px var(--princess-pink); }
+
+        /* --- Pink Spin the Bottle --- */
+        .bottle-area { text-align: center; padding: 50px; background: #fff5f8; border-radius: 40px; border: 3px dashed var(--deep-pink); margin: 40px 0; position: relative; overflow: hidden; }
+        #bottle-container { width: 200px; height: 200px; margin: 0 auto 30px; position: relative; }
+        #bottle { 
+            width: 60px; height: 160px; background: #ff80ab; border-radius: 30px 30px 10px 10px; 
+            position: relative; margin: 0 auto; transition: transform 3s cubic-bezier(0.1, 0.5, 0.1, 1); 
+            border: 4px solid var(--deep-pink); box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+        }
+        #bottle::after { content: '🎀'; position: absolute; top: 20px; left: 12px; font-size: 1.2rem; }
+        
+        .sticky-note { width: 220px; min-height: 200px; padding: 20px; border-radius: 20px; font-family: 'Dancing Script'; font-size: 1.4rem; background: #fff9c4; border: 2px solid rgba(255, 105, 180, 0.2); animation: pop 0.5s ease-out; }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        
+        .btn-royal { background: var(--deep-pink); color: white; border: none; padding: 12px 30px; font-family: 'Playfair Display'; border-radius: 50px; cursor: pointer; transition: 0.3s; margin: 5px; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4); }
+        .btn-royal:hover { transform: scale(1.1) rotate(2deg); background: #ff1493; }
+
+        /* Magic Particle Background */
+        #magic-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
 
         footer { text-align: center; color: var(--deep-pink); padding: 50px; font-family: 'Great Vibes'; font-size: 2rem; }
     </style>
 </head>
 <body>
 
+<canvas id="magic-bg"></canvas>
+
 <header>
     <h1>The Metdes Kingdom</h1>
-    <p style="font-size: 1.5rem; letter-spacing: 2px;">Princesses of PENS since 2020</p>
+    <p class="subtitle">Princesses of PENS since 2020</p>
 </header>
 
 <div class="main-container">
     
     <h2 class="section-title">The Royal Secret Book</h2>
     <div class="book-container">
-        <div class="book" id="magicBook" onclick="this.classList.toggle('open')">
-            <div class="book-cover">
+        <p><i>"Siapa dosen metdes?"</i></p>
+        <input type="text" id="bookPassword" class="pw-input" placeholder="Masukkan nama..." oninput="checkPassword()">
+        <br>
+        <div class="book" id="magicBook">
+            <div class="book-cover" id="bookCover">
                 <h2 style="font-family: 'Great Vibes'; font-size: 2.5rem;">Royal Diary</h2>
-                <div class="lock">🔒</div>
-                <p>Click to Unlock</p>
+                <div class="lock" id="lockIcon">🔒</div>
+                <p id="lockText">Locked</p>
             </div>
             <div class="book-page">
                 <img src="foto/bersama.jpg" alt="Metdes Together">
@@ -150,7 +176,7 @@
                     <img src="anggota/lala_disney.jpg" class="member-img">
                     <div style="text-align: center;">
                         <h3 style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--deep-pink);">Lala</h3>
-                        <p>The Radiant Rapunzel</p>
+                        <p>✨ The Radiant Rapunzel ✨</p>
                         <button class="btn-royal" onclick="saveFront('front-lala', 'Lala')">Download Photo Card</button>
                     </div>
                 </div>
@@ -170,7 +196,7 @@
                     <img src="anggota/salma_disney.jpg" class="member-img">
                     <div style="text-align: center;">
                         <h3 style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--deep-pink);">Salma</h3>
-                        <p>The Intelligent Belle</p>
+                        <p>✨ The Intelligent Belle ✨</p>
                         <button class="btn-royal" onclick="saveFront('front-salma', 'Salma')">Download Photo Card</button>
                     </div>
                 </div>
@@ -189,8 +215,8 @@
                 <div class="card-face" id="front-firo">
                     <img src="anggota/firo_disney.jpg" class="member-img">
                     <div style="text-align: center;">
-                        <h3 style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--deep-pink);">Firo (Laila)</h3>
-                        <p>The Curious Ariel</p>
+                        <h3 style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--deep-pink);">Firo</h3>
+                        <p>✨ The Curious Ariel ✨</p>
                         <button class="btn-royal" onclick="saveFront('front-firo', 'Firo')">Download Photo Card</button>
                     </div>
                 </div>
@@ -211,9 +237,9 @@
             <div id="bottle"></div>
         </div>
         <div id="challenge-display" style="font-family: 'Dancing Script'; font-size: 2rem; min-height: 80px; color: var(--deep-pink); margin-bottom: 20px;">
-            Putar botolnya untuk memulai permainan...
+            Putar botol merah muda untuk memulai...
         </div>
-        <button class="btn-royal" style="font-size: 1.5rem;" onclick="spinBottle()">PUTAR BOTOLNYA! 🍾</button>
+        <button class="btn-royal" style="font-size: 1.5rem;" onclick="spinBottle()">PUTAR BOTOL! 🎀</button>
     </div>
 
     <h2 class="section-title">Secret Garden Notes</h2>
@@ -231,46 +257,65 @@
 </footer>
 
 <script>
+    // --- Password System ---
+    function checkPassword() {
+        const input = document.getElementById('bookPassword').value.toLowerCase();
+        const book = document.getElementById('magicBook');
+        const lockIcon = document.getElementById('lockIcon');
+        const lockText = document.getElementById('lockText');
+        
+        if (input === "bu widi") {
+            book.classList.add('open');
+            lockIcon.innerText = "🔓";
+            lockText.innerText = "Unlocked!";
+            createExplosion(window.innerWidth/2, window.innerHeight/2);
+        } else {
+            book.classList.remove('open');
+            lockIcon.innerText = "🔒";
+            lockText.innerText = "Locked";
+        }
+    }
+
     const truthOrDare = [
-        "TRUTH: Apa momen paling memalukan waktu zaman kuliah/sekolah yang kalau diingat sekarang bikin pengen pindah planet?",
-        "TRUTH: Siapa orang dari masa lalu yang paling ingin kamu sapa lagi, tapi gengsi atau takut canggung?",
-        "TRUTH: Apa hal yang paling kamu syukuri dari persahabatan kalian bertiga saat ini?",
-        "TRUTH: Kalau 5 tahun lagi kita kumpul, kamu bayangin diri kamu sudah jadi sosok yang seperti apa?",
-        "TRUTH: Jujur, di antara kalian bertiga, siapa yang paling sering ghosting di grup WhatsApp?",
-        "TRUTH: Pernah nggak diam-diam nangis gara-gara hal sepele yang sekarang kalau diingat malah lucu?",
+        "TRUTH: Apa momen paling memalukan waktu zaman kuliah yang bikin pengen pindah planet?",
+        "TRUTH: Siapa orang dari masa lalu yang paling ingin kamu sapa lagi, tapi gengsi?",
+        "TRUTH: Apa hal yang paling kamu syukuri dari persahabatan kalian bertiga?",
+        "TRUTH: Kalau 5 tahun lagi kita kumpul, kamu bayangin diri kamu jadi seperti apa?",
+        "TRUTH: Jujur, di antara kalian bertiga, siapa yang paling sering ghosting di grup WA?",
+        "TRUTH: Pernah nggak diam-diam nangis gara-gara hal sepele yang sekarang jadi lucu?",
         "TRUTH: Apa satu impian gila yang belum sempat kamu mulai karena takut gagal?",
-        "TRUTH: Apa satu kebiasaan buruk teman di sebelah kananmu yang sebenarnya pengen kamu protes tapi nggak enak?",
-        "TRUTH: Apa penyesalan terbesar kamu yang akhirnya jadi pelajaran paling berharga sekarang?",
-        "TRUTH: Kalau nanti sudah punya keluarga masing-masing, janji apa yang harus kita tepati supaya tetap bisa hangout bareng?",
-        "DARE: Chat orang yang terakhir kamu kepoin di medsos: 'Tiba-tiba kepikiran, apa kabar?'",
-        "DARE: Tunjukkan foto paling 'alay' atau paling jadul di galeri HP kamu ke semua orang!",
-        "DARE: Rekam video vlog singkat 1 menit untuk dirimu di 10 tahun mendatang, simpan di cloud!",
+        "TRUTH: Apa satu kebiasaan buruk teman di sebelah kananmu yang pengen kamu protes?",
+        "TRUTH: Apa penyesalan terbesar kamu yang akhirnya jadi pelajaran paling berharga?",
+        "TRUTH: Kalau nanti sudah punya keluarga, janji apa supaya tetap bisa hangout bareng?",
+        "DARE: Chat orang terakhir di medsos: 'Tiba-tiba kepikiran, apa kabar?'",
+        "DARE: Tunjukkan foto paling 'alay' di galeri HP kamu ke semua orang!",
+        "DARE: Rekam video vlog 1 menit untuk dirimu di 10 tahun mendatang!",
         "DARE: Post foto selfie paling konyol bertiga di IG Story tanpa filter selama 1 jam!",
         "DARE: Ramalkan nasib percintaan teman di sebelah kirimu dalam 2 tahun ke depan!",
         "DARE: Telepon mantan atau teman lama, tanya: 'Dulu aku orangnya gimana sih?'",
-        "DARE: Berikan pujian yang sangat tulus dan spesifik untuk dua temanmu sampai terharu!",
-        "DARE: Buat bucket list dadakan berisi 3 tempat yang WAJIB kita kunjungi bareng sebelum usia 30!",
-        "DARE: Peragakan gaya bicara atau kebiasaan unik salah satu dari kalian, yang lain harus menebak!",
-        "DARE: Ceritakan satu rahasia kecil tentang 'gebetan masa lalu' yang belum pernah diceritain!"
+        "DARE: Berikan pujian tulus dan spesifik untuk dua temanmu sampai terharu!",
+        "DARE: Buat bucket list dadakan berisi 3 tempat yang WAJIB kita kunjungi bareng!",
+        "DARE: Peragakan gaya bicara unik salah satu dari kalian, yang lain harus menebak!",
+        "DARE: Ceritakan satu rahasia kecil tentang 'gebetan masa lalu'!"
     ];
 
     function spinBottle() {
         const bottle = document.getElementById('bottle');
         const display = document.getElementById('challenge-display');
-        const randomDeg = Math.floor(Math.random() * 3600) + 1440; // Minimal 4 putaran
+        const randomDeg = Math.floor(Math.random() * 3600) + 1440;
         
-        display.innerText = "Ssstt... botol sedang berputar...";
+        display.innerText = "Ssstt... botol sihir sedang berputar...";
         bottle.style.transform = `rotate(${randomDeg}deg)`;
 
         setTimeout(() => {
             const randomIndex = Math.floor(Math.random() * truthOrDare.length);
             display.innerText = truthOrDare[randomIndex];
+            createExplosion(window.innerWidth/2, window.innerHeight/2);
         }, 3100);
     }
 
     function saveFront(elementId, name) {
         const element = document.getElementById(elementId);
-        // Sembunyikan tombol saat download
         const btn = element.querySelector('.btn-royal');
         btn.style.display = 'none';
         
@@ -296,17 +341,71 @@
         document.getElementById('noteContent').value = "";
     }
 
-    // Magic Sparkle
+    // --- Magic Canvas Animation ---
+    const canvas = document.getElementById('magic-bg');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor(x, y, color) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = Math.random() * 3 - 1.5;
+            this.speedY = Math.random() * 3 - 1.5;
+            this.color = color;
+            this.alpha = 1;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.alpha -= 0.01;
+        }
+        draw() {
+            ctx.globalAlpha = this.alpha;
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function createExplosion(x, y) {
+        for(let i=0; i<20; i++) {
+            particles.push(new Particle(x, y, '#ff69b4'));
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for(let i=0; i<particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            if(particles[i].alpha <= 0) {
+                particles.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Cursor Sparkles
     document.addEventListener('mousemove', function(e) {
-        if (Math.random() > 0.15) { 
+        if (Math.random() > 0.1) { 
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
             sparkle.style.left = (e.clientX - 7) + 'px';
             sparkle.style.top = (e.clientY - 7) + 'px';
-            const colors = ['hue-rotate(0deg)', 'hue-rotate(45deg)', 'hue-rotate(280deg)'];
-            sparkle.style.filter = colors[Math.floor(Math.random() * colors.length)];
             document.body.appendChild(sparkle);
             setTimeout(() => { sparkle.remove(); }, 800);
+            if(Math.random() > 0.8) particles.push(new Particle(e.clientX, e.clientY, '#ffd700'));
         }
     });
 </script>
