@@ -22,10 +22,10 @@
             margin: 0; background-color: var(--wizard-dark);
             background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
             font-family: 'IM Fell DW Pica', serif; color: #3e2b14;
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; overflow-x: hidden;
         }
 
-        /* --- Header Magic --- */
+        /* --- Header --- */
         header {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
@@ -33,14 +33,11 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: var(--gold); border-bottom: 5px double var(--gold);
         }
-        header h1 { 
-            font-family: 'Cinzel Decorative'; font-size: clamp(3rem, 8vw, 6rem); margin: 0; 
-            animation: magic-glow 2s ease-in-out infinite alternate;
-        }
+        header h1 { font-family: 'Cinzel Decorative'; font-size: clamp(3rem, 8vw, 6rem); margin: 0; animation: magic-glow 2s ease-in-out infinite alternate; }
         @keyframes magic-glow { from { text-shadow: 0 0 10px var(--gold); } to { text-shadow: 0 0 30px #fff, 0 0 10px var(--gold); } }
 
         .main-container {
-            max-width: 1200px; margin: -100px auto 50px; padding: 40px;
+            max-width: 1200px; margin: -100px auto 50px; padding: 20px;
             background: url('https://www.transparenttextures.com/patterns/paper.png'), var(--parchment);
             box-shadow: 0 0 100px rgba(0,0,0,1); border-radius: 10px;
             border: 15px solid transparent;
@@ -53,16 +50,23 @@
             padding-bottom: 10px; margin: 60px 0 30px;
         }
 
-        /* --- Gallery Polaroid --- */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
-        .polaroid {
-            background: white; padding: 15px 15px 40px 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: 0.4s; cursor: pointer; transform: rotate(-3deg);
+        /* --- Pensieve Gallery (Horizontal Scroll) --- */
+        .gallery-wrapper {
+            overflow-x: auto; white-space: nowrap; padding: 20px;
+            scrollbar-width: thin; scrollbar-color: var(--gryffindor) transparent;
         }
-        .polaroid:nth-child(even) { transform: rotate(3deg); }
-        .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .polaroid img { width: 100%; height: 200px; object-fit: cover; filter: sepia(0.2); }
-        .polaroid p { text-align: center; font-family: 'Dancing Script'; font-size: 1.3rem; margin-top: 15px; color: #222; }
+        .gallery-wrapper::-webkit-scrollbar { height: 8px; }
+        .gallery-wrapper::-webkit-scrollbar-thumb { background: var(--gryffindor); border-radius: 10px; }
+
+        .polaroid {
+            display: inline-block; background: white; padding: 10px 10px 30px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin: 0 15px;
+            transition: 0.3s; transform: rotate(-2deg); vertical-align: top;
+        }
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+        .polaroid img { width: 200px; height: 150px; object-fit: cover; filter: sepia(0.2); border: 1px solid #eee; }
+        .polaroid p { text-align: center; font-family: 'Dancing Script'; font-size: 1.1rem; margin: 10px 0 0; color: #222; }
 
         /* --- Member Flip Cards --- */
         .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
@@ -77,19 +81,18 @@
         .card-back { transform: rotateY(180deg); background: #fffdf5; }
         .member-img { width: 90%; height: 300px; object-fit: cover; border: 1px solid #ddd; }
         .member-info h3 { font-family: 'Cinzel Decorative'; margin: 15px 0 5px; color: var(--gryffindor); }
-        .stats { font-size: 0.85rem; text-align: left; width: 100%; background: #f9f9f9; padding: 10px; border-radius: 5px; margin-top: 5px; }
+        .stats { font-size: 0.85rem; text-align: left; width: 100%; background: #f9f9f9; padding: 10px; border-radius: 5px; }
 
         /* --- Mini Game Dice --- */
         .dice-area { text-align: center; background: rgba(116, 0, 1, 0.04); padding: 40px; border-radius: 20px; border: 2px dashed var(--gryffindor); margin: 40px 0; }
-        #dice { font-size: 100px; cursor: pointer; display: inline-block; transition: 0.5s; }
+        #dice { font-size: 80px; cursor: pointer; display: inline-block; transition: 0.5s; }
         .rolling { animation: shake 0.5s infinite; }
         @keyframes shake { 0%{transform:translate(0,0)} 25%{transform:translate(5px,5px) rotate(10deg)} 75%{transform:translate(-5px,-5px) rotate(-10deg)} 100%{transform:translate(0,0)} }
-        #tod-text { font-family: 'Dancing Script'; font-size: 2rem; color: var(--gryffindor); min-height: 80px; margin-top: 20px; }
+        #tod-text { font-family: 'Dancing Script'; font-size: 1.8rem; color: var(--gryffindor); min-height: 80px; margin-top: 20px; }
 
         /* --- Anonymous Owl Post (WhatsApp) --- */
         .owl-form { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border: 1px solid var(--gold); border-radius: 5px; }
         .owl-form select, .owl-form textarea { width: 100%; padding: 12px; margin: 10px 0; font-family: inherit; font-size: 1rem; }
-        
         .btn-magic {
             background: var(--gryffindor); color: var(--gold); border: 2px solid var(--gold);
             padding: 12px 25px; font-family: 'Cinzel Decorative'; cursor: pointer; transition: 0.3s;
@@ -108,55 +111,70 @@
 
 <div class="main-container">
     
-    <h2 class="section-title">Pensieve of Memories</h2>
-    <div class="gallery">
-        <div class="polaroid"><img src="https://via.placeholder.com/300?text=Memories+1"><p>Zaman SMA 2017</p></div>
-        <div class="polaroid"><img src="https://via.placeholder.com/300?text=Memories+2"><p>Kantin Moments</p></div>
-        <div class="polaroid"><img src="https://via.placeholder.com/300?text=Memories+3"><p>Nongkrong Ippo</p></div>
-        <div class="polaroid"><img src="https://via.placeholder.com/300?text=Memories+4"><p>Forever Together</p></div>
+    <h2 class="section-title">Pensieve: Masa Lalu (2017)</h2>
+    <div class="gallery-wrapper">
+        <div class="polaroid"><img src="foto lama/foto 1.jpg"><p>Memories 1</p></div>
+        <div class="polaroid"><img src="foto lama/foto 2.jpg"><p>Memories 2</p></div>
+        <div class="polaroid"><img src="foto lama/foto 3.jpg"><p>Memories 3</p></div>
+        <div class="polaroid"><img src="foto lama/foto 4.jpg"><p>Memories 4</p></div>
+        <div class="polaroid"><img src="foto lama/foto 5.jpg"><p>Memories 5</p></div>
+        <div class="polaroid"><img src="foto lama/foto 6.jpg"><p>Memories 6</p></div>
+        <div class="polaroid"><img src="foto lama/foto 7.jpg"><p>Memories 7</p></div>
+        <div class="polaroid"><img src="foto lama/foto 8.jpg"><p>Memories 8</p></div>
+        <div class="polaroid"><img src="foto lama/foto 9.jpg"><p>Memories 9</p></div>
+        <div class="polaroid"><img src="foto lama/foto 10.jpg"><p>Memories 10</p></div>
+        <div class="polaroid"><img src="foto lama/foto 11.jpg"><p>Memories 11</p></div>
+    </div>
+
+    <h2 class="section-title">Pensieve: Sekarang (2026)</h2>
+    <div class="gallery-wrapper" style="text-align: center;">
+        <div class="polaroid"><img src="foto baru/foto 1.jpg"><p>Today 1</p></div>
+        <div class="polaroid"><img src="foto baru/foto 2.jpg"><p>Today 2</p></div>
+        <div class="polaroid"><img src="foto baru/foto 3.jpg"><p>Today 3</p></div>
+        <div class="polaroid"><img src="foto baru/foto 4.jpg"><p>Today 4</p></div>
     </div>
 
     <h2 class="section-title">The Order of Ippo Ippo</h2>
     <div class="member-grid">
         
+        <div class="flip-card" id="card-firo">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="firo.jpg" class="member-img">
+                    <div class="member-info"><h3>Firo</h3><p>The Marauder</p></div>
+                </div>
+                <div class="card-face card-back">
+                    <img src="firo.jpg" class="member-img">
+                    <div class="stats"><b>Power:</b> Creative Magic<br><b>Trait:</b> Designer, Seru, Ippo Member.</div>
+                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-firo', 'Firo')">Save Card</button>
+                </div>
+            </div>
+        </div>
+
         <div class="flip-card" id="card-semsem">
             <div class="flip-card-inner">
                 <div class="card-face">
-                    <img src="https://via.placeholder.com/300x400?text=SemSem+2017" class="member-img">
-                    <div class="member-info"><h3>Sem Sem</h3><p>The Matriarch (2017)</p></div>
+                    <img src="sem.jpg" class="member-img">
+                    <div class="member-info"><h3>Sem Sem</h3><p>The Matriarch</p></div>
                 </div>
                 <div class="card-face card-back">
-                    <img src="https://via.placeholder.com/300x400?text=SemSem+2026" class="member-img">
+                    <img src="sem.jpg" class="member-img">
                     <div class="stats"><b>Power:</b> Sabar Maksimal<br><b>Trait:</b> Sipit, Ibu Ippo, Pemersatu.</div>
-                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-semsem', 'SemSem')">Save ID Card</button>
+                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-semsem', 'SemSem')">Save Card</button>
                 </div>
             </div>
         </div>
 
-        <div class="flip-card" id="card-tembem">
+        <div class="flip-card" id="card-mbem">
             <div class="flip-card-inner">
                 <div class="card-face">
-                    <img src="https://via.placeholder.com/300x400?text=Tembem+2017" class="member-img">
+                    <img src="mbem.jpg" class="member-img">
                     <div class="member-info"><h3>Tembem</h3><p>The Gaming Pixie</p></div>
                 </div>
                 <div class="card-face card-back">
-                    <img src="https://via.placeholder.com/300x400?text=Tembem+2026" class="member-img">
+                    <img src="mbem.jpg" class="member-img">
                     <div class="stats"><b>Power:</b> Imut Babyface<br><b>Trait:</b> Putih, Gamer, Susah Kumpul.</div>
-                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-tembem', 'Tembem')">Save ID Card</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="flip-card" id="card-itul">
-            <div class="flip-card-inner">
-                <div class="card-face">
-                    <img src="https://via.placeholder.com/300x400?text=Itul+2017" class="member-img">
-                    <div class="member-info"><h3>Itul</h3><p>The Hufflepuff</p></div>
-                </div>
-                <div class="card-face card-back">
-                    <img src="https://via.placeholder.com/300x400?text=Itul+2026" class="member-img">
-                    <div class="stats"><b>Power:</b> Kalem Santuy<br><b>Trait:</b> Unik, Lemot Lucu, Tinggi.</div>
-                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-itul', 'Itul')">Save ID Card</button>
+                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-mbem', 'Tembem')">Save Card</button>
                 </div>
             </div>
         </div>
@@ -164,13 +182,13 @@
         <div class="flip-card" id="card-fafa">
             <div class="flip-card-inner">
                 <div class="card-face">
-                    <img src="https://via.placeholder.com/300x400?text=Fafa+2017" class="member-img">
+                    <img src="faf.jpg" class="member-img">
                     <div class="member-info"><h3>Fafa</h3><p>The Chaotic Moderator</p></div>
                 </div>
                 <div class="card-face card-back">
-                    <img src="https://via.placeholder.com/300x400?text=Fafa+2026" class="member-img">
+                    <img src="faf.jpg" class="member-img">
                     <div class="stats"><b>Power:</b> Ambivert Rame<br><b>Trait:</b> Poni Mail, Seru, Putih.</div>
-                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-fafa', 'Fafa')">Save ID Card</button>
+                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-fafa', 'Fafa')">Save Card</button>
                 </div>
             </div>
         </div>
@@ -178,13 +196,13 @@
         <div class="flip-card" id="card-setar">
             <div class="flip-card-inner">
                 <div class="card-face">
-                    <img src="https://via.placeholder.com/300x400?text=Setar+2017" class="member-img">
+                    <img src="star.jpg" class="member-img">
                     <div class="member-info"><h3>Setar</h3><p>The Dragon Boss</p></div>
                 </div>
                 <div class="card-face card-back">
-                    <img src="https://via.placeholder.com/300x400?text=Setar+2026" class="member-img">
+                    <img src="star.jpg" class="member-img">
                     <div class="stats"><b>Power:</b> Ngambek Elite<br><b>Trait:</b> Badan Kekar, Serius, Sayang Ippo.</div>
-                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-setar', 'Setar')">Save ID Card</button>
+                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-setar', 'Setar')">Save Card</button>
                 </div>
             </div>
         </div>
@@ -192,13 +210,13 @@
         <div class="flip-card" id="card-raka">
             <div class="flip-card-inner">
                 <div class="card-face">
-                    <img src="https://via.placeholder.com/300x400?text=Raka+2017" class="member-img">
+                    <img src="rak.jpg" class="member-img">
                     <div class="member-info"><h3>Raka</h3><p>The Golden Snitch</p></div>
                 </div>
                 <div class="card-face card-back">
-                    <img src="https://via.placeholder.com/300x400?text=Raka+2026" class="member-img">
+                    <img src="rak.jpg" class="member-img">
                     <div class="stats"><b>Power:</b> Ekstrovert Max<br><b>Trait:</b> Hitam Manis, Raksasa Ippo, Cerewet.</div>
-                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-raka', 'Raka')">Save ID Card</button>
+                    <button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-raka', 'Raka')">Save Card</button>
                 </div>
             </div>
         </div>
@@ -219,7 +237,7 @@
             <option value="">-- Pilih Teman Ippo --</option>
             <option value="semsem">Sem Sem</option>
             <option value="firo">Firo</option>
-            <option value="tembem">Tembem</option>
+            <option value="mbem">Tembem</option>
             <option value="fafa">Fafa</option>
             <option value="setar">Setar</option>
             <option value="raka">Raka</option>
@@ -235,27 +253,23 @@
 </footer>
 
 <script>
-    // 1. INPUT NOMOR WA ANGGOTA (Ganti dengan nomor asli kalian!)
     const waList = {
         'semsem': '628xxxxxxxxxx',
         'firo': '628xxxxxxxxxx',
-        'tembem': '628xxxxxxxxxx',
+        'mbem': '628xxxxxxxxxx',
         'fafa': '628xxxxxxxxxx',
         'setar': '628xxxxxxxxxx',
         'raka': '628xxxxxxxxxx'
     };
 
-    // 2. LOGIKA ANONYMOUS WHATSAPP
     function sendOwl() {
         const t = document.getElementById('target').value;
         const m = document.getElementById('message').value;
         if(!t || !m) { alert("Pilih teman & tulis pesan!"); return; }
-
         const url = `https://wa.me/${waList[t]}?text=*SURAT RAHASIA DARI ANGGOTA IPPO*%0A%0A"${encodeURIComponent(m)}"%0A%0A_Pesan ini anonim dari website Ippo._`;
         window.open(url, '_blank');
     }
 
-    // 3. LOGIKA DADU TRUTH OR DARE
     const todQuestions = [
         "[Truth] Ceritakan momen SMA 2017 yang paling nggak bisa kamu lupain!",
         "[Truth] Siapa anggota Ippo yang paling banyak berubah (glow up)?",
@@ -278,7 +292,6 @@
         }, 1000);
     }
 
-    // 4. LOGIKA SIMPAN KARTU
     function saveCard(id, name) {
         const card = document.getElementById(id);
         card.querySelector('.flip-card-inner').style.transform = 'rotateY(180deg)';
