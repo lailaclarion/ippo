@@ -3,541 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPPO IPPO | Digital Time Capsule</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+    <title>IPPO IPPO | The Marauders of 2017</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+DW+Pica+SC&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ffafcc; /* Pink Soft */
-            --secondary: #a2d2ff; /* Blue Soft */
-            --dark: #2b2d42;
-            --light: #f8f9fa;
-            --accent: #ffeb3b; /* Yellow */
+            --magic-gold: #d4af37;
+            --wizard-dark: #1a1714;
+            --parchment: #f4e4bc;
+            --gryffindor: #740001;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f7f6;
-            color: var(--dark);
             margin: 0;
+            background-color: var(--wizard-dark);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+            color: #3e2b14;
+            font-family: 'IM Fell DW Pica SC', serif;
             overflow-x: hidden;
         }
 
-        /* --- Hero Section --- */
+        /* Hero Section - Great Hall */
         header {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1551269901-5c5e14c25df7?q=80&w=2069') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
-            position: relative;
+            color: var(--magic-gold);
+            border-bottom: 5px double var(--magic-gold);
         }
 
         header h1 {
-            font-size: 6rem;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 5rem;
             margin: 0;
-            text-shadow: 3px 3px 15px rgba(0,0,0,0.5);
-            animation: fadeInDown 1.5s ease;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
         }
 
         header p {
             font-size: 1.5rem;
-            font-weight: 300;
-            margin-top: 10px;
-            letter-spacing: 2px;
-            animation: fadeInUp 1.5s ease 0.5s backward;
+            letter-spacing: 5px;
+            text-transform: uppercase;
         }
 
-        /* --- Journey Section --- */
-        .timeline {
-            padding: 80px 20px;
-            max-width: 900px;
-            margin: auto;
+        /* Parchment Container */
+        .main-content {
+            background: url('https://www.transparenttextures.com/patterns/paper.png'), var(--parchment);
+            max-width: 1000px;
+            margin: -50px auto 50px;
+            padding: 50px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            border-radius: 5px;
+            position: relative;
+            border: 20px solid transparent;
+            border-image: url('https://www.transparenttextures.com/patterns/ornamental-border.png') 30 stretch;
         }
 
         .section-title {
+            font-family: 'Cinzel Decorative', cursive;
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 50px;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .journey-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
+            border-bottom: 2px solid var(--gryffindor);
+            padding-bottom: 10px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            transition: transform 0.3s ease;
         }
 
-        .journey-card:hover {
-            transform: scale(1.02);
-        }
-
-        .glow-up-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 0 20px rgba(162, 210, 255, 0.5);
-        }
-
-        /* --- Squad ID Cards Section --- */
-        .squad-section {
-            background-color: var(--dark);
-            color: white;
-            padding: 80px 20px;
-        }
-
-        .squad-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .id-card {
-            background: #fff;
-            color: var(--dark);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            border: 2px solid transparent;
-        }
-
-        .id-card:hover {
-            transform: translateY(-10px) rotate(1deg);
-            border-color: var(--secondary);
-            box-shadow: 0 15px 30px rgba(162, 210, 255, 0.4);
-        }
-
-        .id-card-header {
-            background: var(--secondary);
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-        }
-
-        .id-card-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .id-profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--light);
-            margin-bottom: 15px;
-            margin-top: -50px; /* Pull up overlay header */
-            background: #ccc; /* Placeholder */
-        }
-
-        .id-card h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .id-role {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .id-stats {
-            width: 100%;
-            font-size: 0.8rem;
-            text-align: left;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .id-motto {
-            font-style: italic;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            color: #444;
-            padding: 0 10px;
-        }
-
-        .status-dot {
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
-        }
-
-        /* Color Coding per Member */
-        .card-firo .id-card-header, .card-firo .id-profile-img { border-color: #ff9f43; background-color: #ff9f43; }
-        .card-sem .id-card-header, .card-sem .id-profile-img { border-color: #10ac84; background-color: #10ac84; }
-        .card-tembem .id-card-header, .card-tembem .id-profile-img { border-color: #5f27cd; background-color: #5f27cd; }
-        .card-fafa .id-card-header, .card-fafa .id-profile-img { border-color: #ee5253; background-color: #ee5253; }
-        .card-raka .id-card-header, .card-raka .id-profile-img { border-color: #222f3e; background-color: #222f3e; }
-        .card-setar .id-card-header, .card-setar .id-profile-img { border-color: #feca57; background-color: #feca57; }
-
-        /* --- Letters Section --- */
-        .letters-section {
-            padding: 80px 20px;
-            background-color: var(--light);
-        }
-
-        .letter-grid {
+        /* Order Members - Portraits */
+        .member-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
-        .member-letter-btn {
-            background: white;
-            padding: 40px 20px;
-            border-radius: 15px;
+        .portrait-frame {
             text-align: center;
+            padding: 15px;
+            border: 10px solid #222;
+            border-image: url('https://img.freepik.com/free-vector/golden-frame-ornament_1017-5421.jpg') 30 stretch;
+            background: #fff;
+            transition: transform 0.3s;
+        }
+
+        .portrait-frame:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 20px var(--magic-gold);
+        }
+
+        .portrait-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: sepia(0.5) contrast(1.1);
+        }
+
+        .member-info h3 { margin: 10px 0 5px; font-family: 'Cinzel Decorative'; }
+        .member-info p { margin: 0; font-style: italic; font-size: 0.9rem; color: var(--gryffindor); }
+
+        /* Pensieve (Timeline) */
+        .pensieve-box {
+            background: rgba(162, 210, 255, 0.1);
+            border: 2px solid #a2d2ff;
+            padding: 30px;
+            border-radius: 50% 50% 10px 10px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: inset 0 0 20px #a2d2ff;
+        }
+
+        /* Locked Letters - Envelopes */
+        .envelope-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .envelope {
+            background: #e0d5b9;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px dashed var(--secondary);
+            border: 1px solid #c4b694;
             position: relative;
-            overflow: hidden;
+            transition: 0.3s;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
         }
 
-        .member-letter-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-5px);
+        .envelope:hover { transform: translateY(-5px); background: #f0e6cc; }
+        
+        .seal {
+            width: 40px;
+            height: 40px;
+            background: var(--gryffindor);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--magic-gold);
+            font-weight: bold;
+            box-shadow: 0 0 5px black;
         }
 
-        .member-letter-btn span {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        /* --- Overlay & Letter Content --- */
+        /* Overlay */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
-            padding: 20px;
-            backdrop-filter: blur(5px);
+            z-index: 100;
         }
 
-        .letter-content {
-            background: #fffbe0; /* Vintage paper color */
+        .parchment-letter {
+            background: url('https://www.transparenttextures.com/patterns/old-map.png'), #fdf5e6;
             padding: 50px;
-            max-width: 600px;
-            width: 100%;
-            border-radius: 5px;
-            position: relative;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 80%;
+            border-radius: 2px;
             font-family: 'Dancing Script', cursive;
             font-size: 1.8rem;
-            color: #333;
-            line-height: 1.4;
-            transform: rotate(-1deg);
+            box-shadow: 0 0 30px white;
+            position: relative;
         }
 
-        .letter-content::before {
-            content: '';
+        .close-spell {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/lined-paper-2.png');
-            opacity: 0.3;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
+            top: 10px; right: 10px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            color: #888;
-            font-size: 1rem;
-            text-transform: uppercase;
+            font-family: serif;
+            font-size: 0.8rem;
+            color: var(--gryffindor);
         }
-        
-        .close-btn:hover { color: #333; }
 
-        /* --- Footer --- */
         footer {
             text-align: center;
-            padding: 30px;
-            background: #1a1a1a;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 { font-size: 4rem; }
-            .journey-card { flex-direction: column; text-align: center; }
-            .letter-content { padding: 30px; font-size: 1.5rem; }
+            color: var(--magic-gold);
+            padding: 40px;
+            font-family: 'Cinzel Decorative';
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Ippo Ippo</h1>
-        <p>Est. 2017 | Every Step Matters</p>
+        <h1>IPPO IPPO</h1>
+        <p>Mischief Managed Since 2017</p>
     </header>
 
-    <section class="timeline">
-        <h2 class="section-title">The Roadmap</h2>
+    <div class="main-content">
+        <h2 class="section-title">The Order of Ippo Ippo</h2>
         
-        <div class="journey-card">
-            <img src="https://via.placeholder.com/180x180?text=SMA+2017" alt="Ippo Ippo SMA" class="glow-up-img">
-            <div>
-                <h3>2017: Origins</h3>
-                <p>Zaman seragam putih abu-abu, kantin belakang, dan mimpi-mimpi absurd. Di sinilah satu langkah pertama Ippo Ippo dimulai bareng-bareng.</p>
+        <div class="member-grid">
+            <div class="portrait-frame">
+                <img src="https://via.placeholder.com/200?text=Firo" alt="Firo" class="portrait-img">
+                <div class="member-info">
+                    <h3>Firo</h3>
+                    <p>The Seeker: Master Strategy</p>
+                </div>
+            </div>
+            <div class="portrait-frame">
+                <img src="https://via.placeholder.com/200?text=Sem+Sem" alt="Sem Sem" class="portrait-img">
+                <div class="member-info">
+                    <h3>Sem Sem</h3>
+                    <p>The Chaser: Eternal Sunshine</p>
+                </div>
+            </div>
+            <div class="portrait-frame">
+                <img src="https://via.placeholder.com/200?text=Tembem" alt="Tembem" class="portrait-img">
+                <div class="member-info">
+                    <h3>Tembem</h3>
+                    <p>The Beater: Heart of Group</p>
+                </div>
+            </div>
+            <div class="portrait-frame">
+                <img src="https://via.placeholder.com/200?text=Fafa" alt="Fafa" class="portrait-img">
+                <div class="member-info">
+                    <h3>Fafa</h3>
+                    <p>The Keeper: Wild Card</p>
+                </div>
+            </div>
+            <div class="portrait-frame">
+                <img src="https://via.placeholder.com/200?text=Raka" alt="Raka" class="portrait-img">
+                <div class="member-info">
+                    <h3>Raka</h3>
+                    <p>The Head Boy: Silent Strength</p>
+                </div>
+            </div>
+            <div class="portrait-frame">
+                <img src="https://via.placeholder.com/200?text=Setar" alt="Setar" class="portrait-img">
+                <div class="member-info">
+                    <h3>Setar</h3>
+                    <p>The Prefect: Shining Star</p>
+                </div>
             </div>
         </div>
 
-        <div class="journey-card" style="flex-direction: row-reverse; text-align: right;">
-            <img src="https://via.placeholder.com/180x180?text=Now+2026" alt="Ippo Ippo Sekarang" class="glow-up-img">
-            <div>
-                <h3>2026: Levelled Up</h3>
-                <p>Dari bocah SMA jadi [isi status kalian sekarang]. Fisik mungkin berubah (tambah glow up dong), tapi kalau udah kumpul, gilanya tetep sama.</p>
+        <h2 class="section-title">Pensieve of Memories</h2>
+        <div class="pensieve-box">
+            <p>"Melihat kembali ke tahun 2017, saat sihir persahabatan kita dimulai..."</p>
+            <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+                <div style="text-align: center;">
+                    <img src="https://via.placeholder.com/150?text=HighSchool+2017" style="border: 3px solid #666; width: 120px;">
+                    <p>2017</p>
+                </div>
+                <div style="font-size: 2rem;">⚡</div>
+                <div style="text-align: center;">
+                    <img src="https://via.placeholder.com/150?text=Present+2026" style="border: 3px solid var(--magic-gold); width: 120px;">
+                    <p>2026</p>
+                </div>
             </div>
         </div>
-    </section>
 
-    <section class="squad-section">
-        <h2 class="section-title" style="color: white;">Meet The Legends</h2>
-        <div class="squad-container">
-
-            <div class="id-card card-firo">
-                <div class="id-card-header">
-                    <span>IPPO IPPO SQUAD</span>
-                    <span>ID: 17-FR-01</span>
-                </div>
-                <div class="id-card-body">
-                    <img src="https://via.placeholder.com/100x100?text=Firo" alt="Firo" class="id-profile-img">
-                    <h3>FIRO</h3>
-                    <p class="id-role">The Architect</p>
-                    <div class="id-stats">
-                        <div class="stat-row"><span>Rencana:</span><span>99%</span></div>
-                        <div class="stat-row"><span>Kesetiaan:</span><span>95%</span></div>
-                        <div class="stat-row"><span>Nafsu Makan:</span><span>80%</span></div>
-                    </div>
-                    <p class="id-motto">"Satu blueprint, seribu jalan nongkrong."</p>
-                </div>
+        <h2 class="section-title">Secret Owl Post</h2>
+        <div class="envelope-grid">
+            <div class="envelope" onclick="unlock('Firo', 'firo123')">
+                <small>For Firo's Eyes Only</small>
+                <div class="seal">H</div>
             </div>
-
-            <div class="id-card card-sem">
-                <div class="id-card-header">
-                    <span>IPPO IPPO SQUAD</span>
-                    <span>ID: 17-SS-02</span>
-                </div>
-                <div class="id-card-body">
-                    <img src="https://via.placeholder.com/100x100?text=SemSem" alt="Sem Sem" class="id-profile-img">
-                    <h3>SEM SEM</h3>
-                    <p class="id-role">The Energy</p>
-                    <div class="id-stats">
-                        <div class="stat-row"><span>Semangat:</span><span>100%</span></div>
-                        <div class="stat-row"><span>Tawa:</span><span>95%</span></div>
-                        <div class="stat-row"><span>Ngantuk:</span><span>10%</span></div>
-                    </div>
-                    <p class="id-motto">"Tawa itu gratis, jadi kenapa pelit?"</p>
-                </div>
+            <div class="envelope" onclick="unlock('Sem Sem', 'semsem123')">
+                <small>For Sem's Eyes Only</small>
+                <div class="seal">H</div>
             </div>
-
-            <div class="id-card card-tembem">
-                <div class="id-card-header">
-                    <span>IPPO IPPO SQUAD</span>
-                    <span>ID: 17-TB-03</span>
-                </div>
-                <div class="id-card-body">
-                    <img src="https://via.placeholder.com/100x100?text=Tembem" alt="Tembem" class="id-profile-img">
-                    <h3>TEMBEM</h3>
-                    <p class="id-role">The Comfort</p>
-                    <div class="id-stats">
-                        <div class="stat-row"><span>Kelembutan:</span><span>100%</span></div>
-                        <div class="stat-row"><span>Cemilan:</span><span>90%</span></div>
-                        <div class="stat-row"><span>Tidur:</span><span>95%</span></div>
-                    </div>
-                    <p class="id-motto">"Ada Tembem, ada kasur empuk."</p>
-                </div>
+            <div class="envelope" onclick="unlock('Tembem', 'tembem123')">
+                <small>For Tembem's Eyes Only</small>
+                <div class="seal">H</div>
             </div>
-
-            <div class="id-card card-fafa">
-                <div class="id-card-header">
-                    <span>IPPO IPPO SQUAD</span>
-                    <span>ID: 17-FF-04</span>
-                </div>
-                <div class="id-card-body">
-                    <img src="https://via.placeholder.com/100x100?text=Fafa" alt="Fafa" class="id-profile-img">
-                    <h3>FAFA</h3>
-                    <p class="id-role">The Wildcard</p>
-                    <div class="id-stats">
-                        <div class="stat-row"><span>Kejutan:</span><span>100%</span></div>
-                        <div class="stat-row"><span>Ide Gila:</span><span>95%</span></div>
-                        <div class="stat-row"><span>Diam:</span><span>5%</span></div>
-                    </div>
-                    <p class="id-motto">"Nggak terduga adalah nama tengahku."</p>
-                </div>
+            <div class="envelope" onclick="unlock('Fafa', 'fafa123')">
+                <small>For Fafa's Eyes Only</small>
+                <div class="seal">H</div>
             </div>
-
-            <div class="id-card card-raka">
-                <div class="id-card-header">
-                    <span>IPPO IPPO SQUAD</span>
-                    <span>ID: 17-RK-05</span>
-                </div>
-                <div class="id-card-body">
-                    <img src="https://via.placeholder.com/100x100?text=Raka" alt="Raka" class="id-profile-img">
-                    <h3>RAKA</h3>
-                    <p class="id-role">The Backbone</p>
-                    <div class="id-stats">
-                        <div class="stat-row"><span>Ketahanan:</span><span>99%</span></div>
-                        <div class="stat-row"><span>Ketenangan:</span><span>95%</span></div>
-                        <div class="stat-row"><span>Emosi:</span><span>10%</span></div>
-                    </div>
-                    <p class="id-motto">"Diam itu emas, tapi sekali bicara.. bum!"</p>
-                </div>
+            <div class="envelope" onclick="unlock('Raka', 'raka123')">
+                <small>For Raka's Eyes Only</small>
+                <div class="seal">H</div>
             </div>
-
-            <div class="id-card card-setar">
-                <div class="id-card-header">
-                    <span>IPPO IPPO SQUAD</span>
-                    <span>ID: 17-ST-06</span>
-                </div>
-                <div class="id-card-body">
-                    <img src="https://via.placeholder.com/100x100?text=Setar" alt="Setar" class="id-profile-img">
-                    <h3>SETAR</h3>
-                    <p class="id-role">The Brightest</p>
-                    <div class="id-stats">
-                        <div class="stat-row"><span>Kecerahan:</span><span>100%</span></div>
-                        <div class="stat-row"><span>Gaya:</span><span>95%</span></div>
-                        <div class="stat-row"><span>Biasa aja:</span><span>10%</span></div>
-                    </div>
-                    <p class="id-motto">"Namanya juga Setar, ya harus bersinar dong!"</p>
-                </div>
+            <div class="envelope" onclick="unlock('Setar', 'setar123')">
+                <small>For Setar's Eyes Only</small>
+                <div class="seal">H</div>
             </div>
-
         </div>
-    </section>
-
-    <section class="letters-section">
-        <h2 class="section-title">Locked Letters</h2>
-        <p style="text-align:center; margin-bottom: 40px; color: #666;">Hanya pemilik nama yang tahu kuncinya.</p>
-        
-        <div class="letter-grid">
-            <div class="member-letter-btn" onclick="openLetter('Firo', 'firo123')"><span>📩</span>Firo</div>
-            <div class="member-letter-btn" onclick="openLetter('Sem Sem', 'semsem123')"><span>📩</span>Sem Sem</div>
-            <div class="member-letter-btn" onclick="openLetter('Tembem', 'tembem123')"><span>📩</span>Tembem</div>
-            <div class="member-letter-btn" onclick="openLetter('Fafa', 'fafa123')"><span>📩</span>Fafa</div>
-            <div class="member-letter-btn" onclick="openLetter('Raka', 'raka123')"><span>📩</span>Raka</div>
-            <div class="member-letter-btn" onclick="openLetter('Setar', 'setar123')"><span>📩</span>Setar</div>
-        </div>
-    </section>
+    </div>
 
     <div id="overlay" class="overlay">
-        <div class="letter-content">
-            <span class="close-btn" onclick="closeLetter()">[Tutup]</span>
-            <p id="letter-text"></p>
-            <p style="text-align:right; font-size: 1.2rem; margin-top: 30px; font-family: 'Poppins', sans-serif;">- Tim Ippo Ippo 2017</p>
+        <div class="parchment-letter">
+            <span class="close-spell" onclick="closeLetter()">[Klik untuk Membakar Surat]</span>
+            <p id="letter-content"></p>
+            <p style="text-align: right;">- Ippo Ippo Marauders</p>
         </div>
     </div>
 
     <footer>
-        <p>Created with ❤️ for Ippo Ippo Family | 2017 - Infinity</p>
+        <p>Solemnly Swear That We Are Up To No Good</p>
     </footer>
 
     <script>
-        // ISI SURATNYA GANTI DISINI
-        const letters = {
-            'Firo': 'Halo Firo, The Architect! Inget nggak rencana gila kita pas SMA yang akhirnya kejadian? Makasih udah jadi otak di balik banyak momen seru Ippo Ippo. Dari 2017 sampai sekarang, solidity kamu nggak pernah berubah.',
-            'Sem Sem': 'Woy Sem Sem! Si paling Energy! Nggak kebayang kalau nongkrong nggak ada tawa khas kamu. Dunia mungkin makin serius, tapi makasih udah selalu bikin Ippo Ippo tetep ceria dari zaman putih abu-abu.',
-            'Tembem': 'Buat Tembem tercinta. Si paling Comfort. Makasih ya udah selalu jadi tempat bersandar (literally dan figuratively) buat kita berenam. Kelembutan hati kamu yang bikin Ippo Ippo merasa kayak rumah.',
-            'Fafa': 'Fafa, The Wildcard! Kadang kita bingung sama jalan pikiran kamu, tapi justru itu yang bikin perjalanan dari 2017 ini nggak pernah ngebosenin. Tetep jadi kawan paling *unpredictable* dan solid ya!',
-            'Raka': 'Raka, sang Backbone. Makasih udah selalu jadi orang paling tenang di tengah kekacauan kita. Kebijaksanaan kamu (meski jarang ngomong) itu yang nahan Ippo Ippo tetep tegak lurus sampai sekarang.',
-            'Setar': 'Setar! Nama adalah doa, dan kamu beneran bersinar. Makasih udah selalu bawa *vibe* positif dan bikin tongkrongan Ippo Ippo jadi lebih berwarna dari zaman sekolah dulu.'
+        const scrollOfSecrets = {
+            'Firo': 'Dear Firo, The Seeker. Strategi kamu menjaga geng ini tetap satu sejak 2017 adalah sihir yang paling hebat.',
+            'Sem Sem': 'Sem Sem, cahaya Astronomi kita. Teruslah bersinar dan membawa tawa ke Aula Besar Ippo Ippo.',
+            'Tembem': 'Buat Tembem, sang Beater. Kekuatan hati kamu yang melindungi kita dari mantra-mantra kesepian.',
+            'Fafa': 'Fafa, The Wild Card. Selalu ada ramuan kejutan yang kamu buat di setiap pertemuan kita.',
+            'Raka': 'Raka, Head Boy kita. Ketenanganmu adalah mantra pelindung bagi Ippo Ippo.',
+            'Setar': 'Setar, The Prefect. Nama kamu terukir di piala persahabatan abadi Ippo Ippo.'
         };
 
-        function openLetter(name, correctPassword) {
-            const pass = prompt(`Masukkan password rahasia untuk membuka surat ${name}:`);
-            
-            if (pass === correctPassword) {
-                document.getElementById('letter-text').innerText = letters[name];
+        function unlock(name, pass) {
+            const input = prompt("Ucapkan Mantra (Password) untuk membuka segel:");
+            if(input === pass) {
+                document.getElementById('letter-content').innerText = scrollOfSecrets[name];
                 document.getElementById('overlay').style.display = 'flex';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when open
-            } else if (pass !== null) {
-                alert('Waduh, password salah! Inget-inget lagi kenangan 2017 kita.');
+            } else {
+                alert("Mantra Salah! Surat ini akan meledak dalam 3 detik!");
             }
         }
 
         function closeLetter() {
             document.getElementById('overlay').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-
-        // Close overlay if clicked outside the letter
-        window.onclick = function(event) {
-            const overlay = document.getElementById('overlay');
-            if (event.target == overlay) {
-                closeLetter();
-            }
         }
     </script>
 </body>
