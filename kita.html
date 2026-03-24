@@ -6,52 +6,109 @@
     <title>IPPO IPPO | The Marauders of 2017-2026</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@600&family=IM+Fell+DW+Pica&family=Space+Mono&display=swap" rel="stylesheet">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        :root { --gold: #d4af37; --gryffindor: #740001; --parchment: #f4e4bc; --wizard-dark: #1a1714; }
+        :root {
+            --gold: #d4af37;
+            --gryffindor: #740001;
+            --parchment: #f4e4bc;
+            --wizard-dark: #1a1714;
+        }
+
         * { box-sizing: border-box; }
-        body { margin: 0; background-color: var(--wizard-dark); background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png'); font-family: 'IM Fell DW Pica', serif; color: #3e2b14; scroll-behavior: smooth; overflow-x: hidden; }
-        
-        header { height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1551269901-5c5e14c25df7?q=80&w=2069') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--gold); border-bottom: 5px double var(--gold); }
+        body {
+            margin: 0; background-color: var(--wizard-dark);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+            font-family: 'IM Fell DW Pica', serif; color: #3e2b14;
+            scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1551269901-5c5e14c25df7?q=80&w=2069') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: var(--gold); border-bottom: 5px double var(--gold);
+        }
         header h1 { font-family: 'Cinzel Decorative'; font-size: clamp(3rem, 8vw, 6rem); margin: 0; animation: magic-glow 2s ease-in-out infinite alternate; }
         @keyframes magic-glow { from { text-shadow: 0 0 10px var(--gold); } to { text-shadow: 0 0 30px #fff, 0 0 10px var(--gold); } }
 
-        .main-container { max-width: 1200px; margin: -100px auto 50px; padding: 20px; background: url('https://www.transparenttextures.com/patterns/paper.png'), var(--parchment); box-shadow: 0 0 100px rgba(0,0,0,1); border-radius: 10px; border: 15px solid transparent; border-image: url('https://www.transparenttextures.com/patterns/ornamental-border.png') 30 stretch; }
-        .section-title { font-family: 'Cinzel Decorative'; text-align: center; font-size: 2.5rem; color: var(--gryffindor); border-bottom: 2px solid var(--gryffindor); padding-bottom: 10px; margin: 60px 0 30px; }
-        
-        /* Gallery */
-        .gallery-wrapper { overflow-x: auto; white-space: nowrap; padding: 20px; scrollbar-width: thin; scrollbar-color: var(--gryffindor) transparent; }
-        .polaroid { display: inline-block; background: white; padding: 10px 10px 30px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin: 0 15px; transition: 0.3s; transform: rotate(-2deg); vertical-align: top; }
-        .polaroid img { width: 200px; height: 150px; object-fit: cover; }
-        .polaroid p { text-align: center; font-family: 'Dancing Script'; margin-top: 10px; }
+        .main-container {
+            max-width: 1200px; margin: -100px auto 50px; padding: 20px;
+            background: url('https://www.transparenttextures.com/patterns/paper.png'), var(--parchment);
+            box-shadow: 0 0 100px rgba(0,0,0,1); border-radius: 10px;
+            border: 15px solid transparent;
+            border-image: url('https://www.transparenttextures.com/patterns/ornamental-border.png') 30 stretch;
+        }
 
-        /* Wall Style */
-        #sticky-wall { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; min-height: 300px; padding: 20px; background: rgba(0,0,0,0.05); border-radius: 15px; border: 4px double var(--gryffindor); margin-top: 20px; }
-        .sticky-note { width: 180px; min-height: 180px; padding: 15px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); font-family: 'Dancing Script'; font-size: 1.2rem; border-bottom-right-radius: 20px; position: relative; display: flex; flex-direction: column; }
-        .sticky-note strong { display: block; font-family: 'Space Mono'; font-size: 0.8rem; border-bottom: 1px dashed rgba(0,0,0,0.1); margin-bottom: 10px; }
-        .sticky-note p { flex-grow: 1; margin: 0; }
-        .sticky-note small { text-align: right; opacity: 0.4; font-size: 0.7rem; }
+        .section-title {
+            font-family: 'Cinzel Decorative'; text-align: center; font-size: 2.5rem;
+            color: var(--gryffindor); border-bottom: 2px solid var(--gryffindor);
+            padding-bottom: 10px; margin: 60px 0 30px;
+        }
 
-        /* Members */
+        /* --- Pensieve Gallery --- */
+        .gallery-wrapper {
+            overflow-x: auto; white-space: nowrap; padding: 20px;
+            scrollbar-width: thin; scrollbar-color: var(--gryffindor) transparent;
+        }
+        .gallery-wrapper::-webkit-scrollbar { height: 8px; }
+        .gallery-wrapper::-webkit-scrollbar-thumb { background: var(--gryffindor); border-radius: 10px; }
+
+        .polaroid {
+            display: inline-block; background: white; padding: 10px 10px 30px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin: 0 15px;
+            transition: 0.3s; transform: rotate(-2deg); vertical-align: top;
+        }
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+        .polaroid img { width: 200px; height: 150px; object-fit: cover; filter: sepia(0.2); border: 1px solid #eee; }
+        .polaroid p { text-align: center; font-family: 'Dancing Script'; font-size: 1.1rem; margin: 10px 0 0; color: #222; }
+
+        /* --- Member Flip Cards --- */
         .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .flip-card { perspective: 1000px; height: 550px; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
-        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 12px solid #222; border-image: url('https://img.freepik.com/free-vector/golden-frame-ornament_1017-5421.jpg') 30 stretch; background: white; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .card-face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border: 12px solid #222; border-image: url('https://img.freepik.com/free-vector/golden-frame-ornament_1017-5421.jpg') 30 stretch;
+            background: white; display: flex; flex-direction: column; align-items: center; padding: 20px;
+        }
         .card-back { transform: rotateY(180deg); background: #fffdf5; }
-        .member-img { width: 90%; height: 300px; object-fit: cover; }
+        .member-img { width: 90%; height: 300px; object-fit: cover; border: 1px solid #ddd; }
+        .member-info h3 { font-family: 'Cinzel Decorative'; margin: 15px 0 5px; color: var(--gryffindor); }
+        .stats { font-size: 0.85rem; text-align: left; width: 100%; background: #f9f9f9; padding: 10px; border-radius: 5px; }
 
-        /* Form & Buttons */
-        .owl-form { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border: 1px solid var(--gold); border-radius: 8px; }
-        select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; font-family: inherit; }
-        .btn-magic { background: var(--gryffindor); color: var(--gold); border: 2px solid var(--gold); padding: 12px 25px; font-family: 'Cinzel Decorative'; cursor: pointer; transition: 0.3s; width: 100%; }
-        .btn-magic:hover { background: var(--gold); color: var(--gryffindor); }
-
-        /* Dice */
+        /* --- Mini Game Dice --- */
         .dice-area { text-align: center; background: rgba(116, 0, 1, 0.04); padding: 40px; border-radius: 20px; border: 2px dashed var(--gryffindor); margin: 40px 0; }
-        #dice { font-size: 80px; cursor: pointer; transition: 0.5s; }
+        #dice { font-size: 80px; cursor: pointer; display: inline-block; transition: 0.5s; }
         .rolling { animation: shake 0.5s infinite; }
         @keyframes shake { 0%{transform:translate(0,0)} 25%{transform:translate(5px,5px) rotate(10deg)} 75%{transform:translate(-5px,-5px) rotate(-10deg)} 100%{transform:translate(0,0)} }
+        #tod-text { font-family: 'Dancing Script'; font-size: 1.8rem; color: var(--gryffindor); min-height: 80px; margin-top: 20px; }
+
+        /* --- Form Styles --- */
+        .owl-form { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border: 1px solid var(--gold); border-radius: 5px; }
+        .owl-form select, .owl-form textarea { width: 100%; padding: 12px; margin: 10px 0; font-family: inherit; font-size: 1rem; }
+        .btn-magic {
+            background: var(--gryffindor); color: var(--gold); border: 2px solid var(--gold);
+            padding: 12px 25px; font-family: 'Cinzel Decorative'; cursor: pointer; transition: 0.3s;
+        }
+        .btn-magic:hover { background: var(--gold); color: var(--gryffindor); }
+
+        /* --- Sticky Note Wall --- */
+        .sticky-note {
+            width: 180px; min-height: 180px; padding: 15px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+            font-family: 'Dancing Script', cursive; font-size: 1.2rem;
+            position: relative; border-bottom-right-radius: 20px;
+            display: flex; flex-direction: column;
+        }
+
+        footer { text-align: center; color: var(--gold); padding: 50px; font-family: 'Cinzel Decorative'; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -63,126 +120,197 @@
 
 <div class="main-container">
     
-    <h2 class="section-title">Pensieve: Gallery</h2>
+    <h2 class="section-title">Pensieve: Masa Lalu </h2>
     <div class="gallery-wrapper">
-        <div class="polaroid"><img src="foto lama/foto 1.jpg"><p>2017 Memories</p></div>
-        <div class="polaroid"><img src="foto lama/foto 2.jpg"><p>North Quay Trip</p></div>
-        <div class="polaroid"><img src="foto baru/foto 1.jpg"><p>2026 Vibes</p></div>
+        <div class="polaroid"><img src="foto lama/foto 1.jpg"><p>Foto album kelas</p></div>
+        <div class="polaroid"><img src="foto lama/foto 2.jpg"><p>north quay trip</p></div>
+        <div class="polaroid"><img src="foto lama/foto 3.jpg"><p>hari kartini</p></div>
+        <div class="polaroid"><img src="foto lama/foto 4.jpg"><p>hari pahlawan</p></div>
+        <div class="polaroid"><img src="foto lama/foto 5.jpg"><p>bukber kelas</p></div>
+        <div class="polaroid"><img src="foto lama/foto 6.jpg"><p>pantai 3 warna malang</p></div>
+        <div class="polaroid"><img src="foto lama/foto 7.jpg"><p>pantai pandhawa jogja</p></div>
+        <div class="polaroid"><img src="foto lama/foto 8.jpg"><p>17 agustus</p></div>
+        <div class="polaroid"><img src="foto lama/foto 9.jpg"><p>classmate</p></div>
+        <div class="polaroid"><img src="foto lama/foto 10.jpg"><p>bukber paskib</p></div>
+        <div class="polaroid"><img src="foto lama/foto 11.jpg"><p>liburan kelas</p></div>
+    </div>
+
+    <h2 class="section-title">Pensieve: Sekarang </h2>
+    <div class="gallery-wrapper" style="text-align: center;">
+        <div class="polaroid"><img src="foto baru/foto 1.jpg"><p>itul,mbem,sem</p></div>
+        <div class="polaroid"><img src="foto baru/foto 2.jpg"><p>kita</p></div>
+        <div class="polaroid"><img src="foto baru/foto 3.jpg"><p>raka,faf,setar</p></div>
+        <div class="polaroid"><img src="foto baru/foto 4.jpg"><p>kita</p></div>
     </div>
 
     <h2 class="section-title">The Order of Ippo Ippo</h2>
     <div class="member-grid">
         <div class="flip-card" id="card-firo">
             <div class="flip-card-inner">
-                <div class="card-face">
-                    <img src="anggota/fironow.jpg" class="member-img">
-                    <h3>Firo</h3><p>The Marauder</p>
-                </div>
-                <div class="card-face card-back">
-                    <img src="anggota/firo.jpg" class="member-img">
-                    <div style="font-size:0.8rem; text-align:left; width:100%; background:#f9f9f9; padding:10px;">
-                        <b>Power:</b> Creative Magic<br><b>Trait:</b> Lemot tapi Kreatif.
-                    </div>
-                    <button class="btn-magic" style="margin-top:10px;" onclick="saveCard('card-firo', 'Firo')">Save PNG</button>
-                </div>
+                <div class="card-face"><img src="anggota/fironow.jpg" class="member-img"><div class="member-info"><h3>Firo</h3><p>The Marauder</p></div></div>
+                <div class="card-face card-back"><img src="anggota/firo.jpg" class="member-img"><div class="stats"><b>Power:</b> Creative Magic<br><b>Trait:</b> lemot, kreatip.</div><button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-firo', 'Firo')">Save Card</button></div>
             </div>
         </div>
+        <div class="flip-card" id="card-semsem">
+            <div class="flip-card-inner">
+                <div class="card-face"><img src="anggota/semnow.jpg" class="member-img"><div class="member-info"><h3>Sem Sem</h3><p>The Matriarch</p></div></div>
+                <div class="card-face card-back"><img src="anggota/sem.jpg" class="member-img"><div class="stats"><b>Power:</b> emak emak pada umumnya<br><b>Trait:</b> Sipit, Ibu Ippo, Pemersatu.</div><button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-semsem', 'SemSem')">Save Card</button></div>
+            </div>
         </div>
+        <div class="flip-card" id="card-mbem">
+            <div class="flip-card-inner">
+                <div class="card-face"><img src="anggota/mbemnow.jpg" class="member-img"><div class="member-info"><h3>Tembem</h3><p>The Gaming Pixie</p></div></div>
+                <div class="card-face card-back"><img src="anggota/mbem.jpg" class="member-img"><div class="stats"><b>Power:</b> Imut Babyface<br><b>Trait:</b>bayek,adek,ibuk.</div><button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-mbem', 'Tembem')">Save Card</button></div>
+            </div>
+        </div>
+        <div class="flip-card" id="card-fafa">
+            <div class="flip-card-inner">
+                <div class="card-face"><img src="anggota/fafnow.jpg" class="member-img"><div class="member-info"><h3>Fafa</h3><p>The Chaotic Moderator</p></div></div>
+                <div class="card-face card-back"><img src="anggota/faf.jpg" class="member-img"><div class="stats"><b>Power:</b> Ambivert Rame<br><b>Trait:</b> Poni Mail, moderator cerita,panitia lari.</div><button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-fafa', 'Fafa')">Save Card</button></div>
+            </div>
+        </div>
+        <div class="flip-card" id="card-setar">
+            <div class="flip-card-inner">
+                <div class="card-face"><img src="anggota/starnow.jpg" class="member-img"><div class="member-info"><h3>Setar</h3><p>The Dragon Boss</p></div></div>
+                <div class="card-face card-back"><img src="anggota/star.jpg" class="member-img"><div class="stats"><b>Power:</b> Big Boss<br><b>Trait:</b> ngomel 24/7 ceramah 24/7.</div><button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-setar', 'Setar')">Save Card</button></div>
+            </div>
+        </div>
+        <div class="flip-card" id="card-raka">
+            <div class="flip-card-inner">
+                <div class="card-face"><img src="anggota/raknow.jpg" class="member-img"><div class="member-info"><h3>Raka</h3><p>The Golden Snitch</p></div></div>
+                <div class="card-face card-back"><img src="anggota/rak.jpg" class="member-img"><div class="stats"><b>Power:</b> Ekstrovert Max<br><b>Trait:</b> ngomong 24/7, adek kita.</div><button class="btn-magic" style="margin-top: 15px;" onclick="saveCard('card-raka', 'Raka')">Save Card</button></div>
+            </div>
+        </div>
+    </div>
 
     <h2 class="section-title">The Dice of Fate</h2>
     <div class="dice-area">
         <div id="dice" onclick="rollDice()">🎲</div>
-        <div id="tod-text" style="font-family:'Dancing Script'; font-size:1.8rem; color:var(--gryffindor); margin-top:20px;">
-            Ketuk dadu untuk mulai...
-        </div>
+        <div id="tod-text">Ketuk Dadu untuk mulai bermain...</div>
+        <button class="btn-magic" onclick="rollDice()">KOCOK DADU!</button>
     </div>
 
     <h2 class="section-title">The Secret Wall of Ippo</h2>
-    <div class="owl-form">
-        <select id="noteTarget">
-            <option value="">-- Kirim buat siapa? --</option>
-            <option value="Semua">Semua Anggota</option>
-            <option value="Semsem">Semsem</option>
-            <option value="Firo">Firo</option>
-            <option value="Mbem">Mbem</option>
-            <option value="Fafa">Fafa</option>
-            <option value="Setar">Setar</option>
-            <option value="Raka">Raka</option>
-        </select>
-        <textarea id="noteContent" rows="3" placeholder="Tulis pesan rahasiamu (Anonim)..."></textarea>
-        <button class="btn-magic" onclick="addNote()">TEMPEL DI DINDING</button>
-    </div>
-    <div id="sticky-wall"></div>
+    <div class="owl-post-container">
+        <p style="text-align: center; font-family: 'Dancing Script'; font-size: 1.5rem;">
+            Tempelkan pesan rahasiamu di dinding ini...
+        </p>
+        
+        <div class="owl-form" style="margin-bottom: 40px;">
+            <select id="noteTarget">
+                <option value="">-- Surat buat siapa? --</option>
+                <option value="Semsem">Semsem</option>
+                <option value="Firo">Firo</option>
+                <option value="Mbem">Mbem</option>
+                <option value="Fafa">Fafa</option>
+                <option value="Setar">Setar</option>
+                <option value="Raka">Raka</option>
+                <option value="Semua Anggota">Semua Anggota</option>
+            </select>
+            <textarea id="noteContent" rows="3" placeholder="Tulis pesan jujurmu (Anonim)..."></textarea>
+            <button class="btn-magic" style="width: 100%;" onclick="addNote()">TEMPEL DI DINDING</button>
+        </div>
 
+        <div id="sticky-wall" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; min-height: 300px; padding: 20px; background: rgba(0,0,0,0.05); border-radius: 15px; border: 4px double var(--gryffindor);">
+        </div>
+        
+        <p style="text-align:center; margin-top:10px; opacity:0.6;">*Semua pesan bersifat publik di grup ini dan anonim.</p>
+    </div>
 </div>
 
 <footer>
-    <p>Created by Clarion | 2026 Edition</p>
+    <p>Created with Magic by Clarion | 2026</p>
 </footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+    // --- CONFIG FIREBASE ---
     const firebaseConfig = {
-  apiKey: "AIzaSyCr196DGOJzUzIk132tkDXXfU6YqHZWrkg",
-  authDomain: "ippo-d3c38.firebaseapp.com",
-  projectId: "ippo-d3c38",
-  storageBucket: "ippo-d3c38.firebasestorage.app",
-  messagingSenderId: "496287634511",
-  appId: "1:496287634511:web:cc079d7bc32b7b8153c63a"
-};
+        apiKey: "AIzaSyCr196DGOJzUzIk132tkDXXfU6YqHZWrkg",
+        authDomain: "ippo-d3c38.firebaseapp.com",
+        projectId: "ippo-d3c38",
+        storageBucket: "ippo-d3c38.firebasestorage.app",
+        messagingSenderId: "496287634511",
+        appId: "1:496287634511:web:cc079d7bc32b7b8153c63a",
+        databaseURL: "https://ippo-d3c38-default-rtdb.firebaseio.com"
+    };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const dbRef = ref(db, 'notes');
 
-    // --- 2. LOGIKA STICKY NOTES ONLINE ---
+    // --- FUNGSI TEMPEL NOTE ---
     window.addNote = function() {
         const target = document.getElementById('noteTarget').value;
         const content = document.getElementById('noteContent').value;
-        if (!target || !content) { alert("Isi dulu!"); return; }
+        
+        if (!target || !content) {
+            alert("Pilih tujuan dan tulis pesannya, Marauders!");
+            return;
+        }
 
+        const colors = ['#fff59d', '#ffcc80', '#81d4fa', '#a5d6a7', '#f48fb1', '#ce93d8'];
+        
         push(dbRef, {
             to: target,
             text: content,
-            color: ['#fff59d', '#ffcc80', '#81d4fa', '#a5d6a7', '#f48fb1'][Math.floor(Math.random() * 5)],
+            color: colors[Math.floor(Math.random() * colors.length)],
             rotation: Math.floor(Math.random() * 10) - 5,
             timestamp: Date.now()
         });
+
         document.getElementById('noteContent').value = "";
     };
 
+    // --- FUNGSI BACA NOTE (REALTIME) ---
     onValue(dbRef, (snapshot) => {
         const wall = document.getElementById('sticky-wall');
         wall.innerHTML = "";
         const data = snapshot.val();
+        
         if (data) {
-            Object.values(data).reverse().forEach(n => {
+            // Kita balik urutannya supaya yang terbaru ada di paling depan
+            const notes = Object.values(data).reverse();
+            notes.forEach(n => {
                 const div = document.createElement('div');
                 div.className = "sticky-note";
-                div.style = `background:${n.color}; transform:rotate(${n.rotation}deg);`;
-                div.innerHTML = `<strong>To: ${n.to}</strong><p>${n.text}</p><small>Owl Post</small>`;
+                div.style = `background: ${n.color}; transform: rotate(${n.rotation}deg);`;
+                div.innerHTML = `
+                    <strong style="border-bottom: 1px dashed rgba(0,0,0,0.2); margin-bottom: 10px; font-family: 'Space Mono'; font-size: 0.8rem;">
+                        To: ${n.to}
+                    </strong>
+                    <p style="margin: 0; flex-grow: 1;">${n.text}</p>
+                    <small style="text-align: right; opacity: 0.3; font-size: 0.6rem;">Owl Post</small>
+                `;
                 wall.appendChild(div);
             });
         } else {
-            wall.innerHTML = "<p style='opacity:0.5'>Belum ada pesan rahasia...</p>";
+            wall.innerHTML = '<p style="opacity: 0.5;">Dinding masih kosong... jadilah yang pertama menulis!</p>';
         }
     });
+</script>
 
-    // --- 3. LOGIKA TRUTH OR DARE ---
+<script>
     const todQuestions = [
         "[Truth] Ceritakan momen SMA 2017 yang paling nggak bisa kamu lupain!",
         "[Truth] Siapa anggota Ippo yang paling banyak berubah (glow up)?",
         "[Truth] Apa ketakutan terbesarmu soal persahabatan kita ke depannya?",
+        "[Truth] Siapa anggota Ippo yang menurutmu paling 'berubah' sifatnya dari 2017 sampai sekarang?",
+        "[Truth] Siapa anggota Ippo yang paling dewasa?",
+        "[Truth] Jujur, siapa di grup ini yang paling sering kamu 'skip' kalau lagi curhat karena nasihatnya suka nggak masuk akal?",
+        "[Truth] Apa kesan pertamamu (first impression) ke tiap-tiap anggota pas awal banget kenal di 2017?",
+        "[Truth] Sebutkan satu hal yang paling kamu kangenin dari suasana sekolah kita dulu?",
+        "[Truth] Di antara kita berenam, siapa yang menurutmu bakal menikah paling awal?",
         "[Dare] Kirim foto aib anggota Ippo yang ada di HP kamu ke grup WA!",
-        "[Dare] Ceritakan rahasia masa kini yang belum ada satu pun anggota Ippo tahu!"
-        // Tambahkan lagi di sini...
+        "[Dare] Ceritakan rahasia masa kini yang belum ada satu pun anggota Ippo tahu!",
+        "[Dare] Tirukan gaya ngomong salah satu anggota Ippo sampai yang lain bisa tebak!",
+        "[Dare] Cari foto paling 'jadul' kalian berenam di galeri HP-mu, share ke grup!",
+        "[Dare] Nyanyikan satu lagu yang menurutmu paling menggambarkan persahabatan kita!"
     ];
 
-    window.rollDice = function() {
+    function rollDice() {
         const d = document.getElementById('dice');
         const t = document.getElementById('tod-text');
         d.classList.add('rolling');
@@ -192,19 +320,23 @@ const app = initializeApp(firebaseConfig);
             const faces = ['⚀','⚁','⚂','⚃','⚄','⚅'];
             d.innerText = faces[roll-1];
             t.innerText = todQuestions[Math.floor(Math.random() * todQuestions.length)];
-        }, 1000);
-    };
+        }, 800);
+    }
 
-    // --- 4. SAVE CARD FUNCTION ---
-    window.saveCard = function(id, name) {
+    function saveCard(id, name) {
         const card = document.getElementById(id);
-        html2canvas(card).then(canvas => {
-            const link = document.createElement('a');
-            link.download = `Ippo_Card_${name}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    };
+        const inner = card.querySelector('.flip-card-inner');
+        inner.style.transform = 'rotateY(180deg)';
+        
+        setTimeout(() => {
+            html2canvas(card, { useCORS: true }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `Ippo_Card_${name}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }, 500);
+    }
 </script>
 
 </body>
