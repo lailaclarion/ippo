@@ -125,6 +125,28 @@
         }
 
         footer { text-align: center; color: var(--deep-pink); padding: 50px; font-family: 'Great Vibes'; font-size: 2rem; }
+        /* --- Sparkle Effect Style --- */
+.sparkle {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/11502/11502787.png'); /* Icon Bintang Kecil */
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: sparkle-fade 0.8s ease-out forwards;
+}
+
+@keyframes sparkle-fade {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+}
+
+/* Ganti kursor default jadi tongkat sihir */
+body {
+    cursor: url('https://cdn-icons-png.flaticon.com/32/1012/1012462.png'), auto !important;
+}
     </style>
 </head>
 <body>
@@ -264,6 +286,29 @@
             link.click();
         });
     }
+    // --- Magic Sparkle Script ---
+document.addEventListener('mousemove', function(e) {
+    // Membatasi jumlah bintang agar tidak terlalu berat
+    if (Math.random() > 0.1) { 
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        
+        // Atur posisi bintang tepat di ujung kursor
+        sparkle.style.left = (e.clientX - 7) + 'px';
+        sparkle.style.top = (e.clientY - 7) + 'px';
+        
+        // Randomize sedikit warna/filter biar makin cantik
+        const colors = ['hue-rotate(0deg)', 'hue-rotate(45deg)', 'hue-rotate(280deg)'];
+        sparkle.style.filter = colors[Math.floor(Math.random() * colors.length)];
+        
+        document.body.appendChild(sparkle);
+        
+        // Hapus elemen setelah animasi selesai agar memori tetap enteng
+        setTimeout(() => {
+            sparkle.remove();
+        }, 800);
+    }
+});
 </script>
 
 </body>
