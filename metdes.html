@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METDES | The Royal Princesses of PENS</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&family=Poppins:wght@300;400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --princess-pink: #ffc1d6;
+            --royal-purple: #e1bee7;
+            --gold-sparkle: #ffd700;
+            --magic-white: #ffffff;
+            --deep-pink: #ff69b4;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; 
+            background: #fff0f5 url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+            font-family: 'Poppins', sans-serif; 
+            color: #5d4037;
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+        }
+
+        /* --- Magic Cursor Effect (Simple) --- */
+        body { cursor: url('https://cdn-icons-png.flaticon.com/32/1012/1012462.png'), auto; }
+
+        /* --- Header: The Castle --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(255, 192, 214, 0.4), rgba(225, 190, 231, 0.4)), 
+                        url('https://images.unsplash.com/photo-1545638148-312781f14ec3?q=80&w=2070') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: var(--deep-pink); border-bottom: 8px solid var(--princess-pink);
+            position: relative;
+        }
+        header::after {
+            content: "🌸 🌷 🎀"; font-size: 2rem; position: absolute; bottom: 20px;
+        }
+        header h1 { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: clamp(4rem, 10vw, 8rem); 
+            margin: 0; 
+            text-shadow: 3px 3px 0px white, 6px 6px 20px rgba(255, 105, 180, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .main-container {
+            max-width: 1200px; margin: -50px auto 50px; padding: 40px;
+            background: white;
+            box-shadow: 0 0 50px rgba(255, 105, 180, 0.2); 
+            border-radius: 50px;
+            border: 10px solid var(--princess-pink);
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display'; text-align: center; font-size: 3rem;
+            color: var(--deep-pink); margin: 60px 0 30px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .section-title::before, .section-title::after {
+            content: "✨"; margin: 0 15px; font-size: 1.5rem;
+        }
+
+        /* --- PENS Journey Gallery --- */
+        .gallery-wrapper {
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px;
+            scrollbar-width: thin; scrollbar-color: var(--princess-pink) transparent;
+        }
+        .princess-frame {
+            min-width: 250px; background: #fff; padding: 15px;
+            border-radius: 20px; border: 3px solid var(--royal-purple);
+            box-shadow: 10px 10px 0px var(--princess-pink);
+            transition: 0.3s;
+        }
+        .princess-frame:hover { transform: translateY(-10px) rotate(2deg); }
+        .princess-frame img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; }
+        .princess-frame p { text-align: center; font-family: 'Dancing Script'; font-size: 1.3rem; margin-top: 10px; }
+
+        /* --- Member Flip Cards (Princess Style) --- */
+        .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .flip-card { perspective: 1000px; height: 500px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        
+        .card-face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 30px; border: 8px solid var(--princess-pink);
+            background: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .card-back { transform: rotateY(180deg); background: var(--royal-purple); color: white; border-color: var(--deep-pink); }
+        
+        .member-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid var(--princess-pink); margin-top: 20px; }
+        .member-info h3 { font-family: 'Playfair Display'; font-size: 2rem; margin: 15px 0 5px; color: var(--deep-pink); }
+        .card-back .member-info h3 { color: white; }
+        
+        .traits { font-size: 1rem; line-height: 1.6; background: rgba(255,255,255,0.3); padding: 15px; border-radius: 15px; width: 90%; }
+
+        /* --- Dice of Destiny --- */
+        .dice-area { text-align: center; background: var(--royal-purple); padding: 40px; border-radius: 40px; margin: 40px 0; color: white; }
+        #dice { font-size: 100px; cursor: pointer; text-shadow: 0 0 20px white; display: inline-block; transition: 0.5s; }
+        .btn-royal {
+            background: var(--deep-pink); color: white; border: none;
+            padding: 15px 40px; font-family: 'Playfair Display'; font-size: 1.2rem;
+            border-radius: 50px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        .btn-royal:hover { background: white; color: var(--deep-pink); transform: scale(1.1); }
+
+        /* --- Sticky Note Wall --- */
+        .sticky-note {
+            width: 200px; min-height: 200px; padding: 20px; border-radius: 20px;
+            font-family: 'Dancing Script'; font-size: 1.4rem; box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+            background: #fff9c4; border: 2px solid rgba(255, 105, 180, 0.2);
+        }
+
+        footer { text-align: center; color: var(--deep-pink); padding: 50px; font-family: 'Great Vibes'; font-size: 2rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Metdes Kingdom</h1>
+    <p style="font-size: 1.5rem; letter-spacing: 2px;">Princesses of PENS since 2020</p>
+</header>
+
+<div class="main-container">
+    
+    <h2 class="section-title">Royal Journey: PENS 2020</h2>
+    <div class="gallery-wrapper">
+        <div class="princess-frame"><img src="foto/maba.jpg"><p>Maba PENS 2020</p></div>
+        <div class="princess-frame"><img src="foto/lab.jpg"><p>Sengsara di Lab</p></div>
+        <div class="princess-frame"><img src="foto/kantin.jpg"><p>Ghibah di Kantin</p></div>
+        <div class="princess-frame"><img src="foto/sidang.jpg"><p>Menuju Gelar Princess</p></div>
+        <div class="princess-frame"><img src="foto/wisuda.jpg"><p>Happily Ever After</p></div>
+    </div>
+
+    <h2 class="section-title">The Royal Princesses</h2>
+    <div class="member-grid">
+        <div class="flip-card" id="card-lala">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="anggota/lala_disney.jpg" class="member-img">
+                    <div class="member-info"><h3>Lala</h3><p>The Radiant Socialite</p></div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="member-info"><h3>Princess Lala</h3></div>
+                    <div class="traits">
+                        🌸 <b>Power:</b> Ultra Extrovert Magic<br>
+                        🎀 <b>Trait:</b> Cerewet gemes, rame banget, seru, dan ratu konten!
+                    </div>
+                    <button class="btn-royal" style="margin-top: 20px;" onclick="saveCard('card-lala', 'Lala')">Save Portrait</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" id="card-salma">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="anggota/salma_disney.jpg" class="member-img">
+                    <div class="member-info"><h3>Salma</h3><p>The Enchanting Orator</p></div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="member-info"><h3>Princess Salma</h3></div>
+                    <div class="traits">
+                        ✨ <b>Power:</b> Royal Presentation<br>
+                        🎤 <b>Trait:</b> Cantik pol, ceria, keren banget kalau udah jadi presenter!
+                    </div>
+                    <button class="btn-royal" style="margin-top: 20px;" onclick="saveCard('card-salma', 'Salma')">Save Portrait</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" id="card-firo">
+            <div class="flip-card-inner">
+                <div class="card-face">
+                    <img src="anggota/firo_disney.jpg" class="member-img">
+                    <div class="member-info"><h3>Firo</h3><p>The Creative Architect</p></div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="member-info"><h3>Princess Firo</h3></div>
+                    <div class="traits">
+                        🎨 <b>Power:</b> Master of Visual Art<br>
+                        🦋 <b>Trait:</b> Pendiam manis (Ambivert), desainer andalan kingdom!
+                    </div>
+                    <button class="btn-royal" style="margin-top: 20px;" onclick="saveCard('card-firo', 'Firo')">Save Portrait</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title">The Wand of Fate</h2>
+    <div class="dice-area">
+        <div id="dice" onclick="rollDice()">👑</div>
+        <div id="tod-text" style="font-family: 'Dancing Script'; font-size: 2rem; margin: 20px 0;">Ketuk Mahkota untuk ramalan hari ini...</div>
+        <button class="btn-royal" onclick="rollDice()">AYUN KAN TONGKAT!</button>
+    </div>
+
+    <h2 class="section-title">Secret Garden Notes</h2>
+    <div style="text-align: center;">
+        <div style="background: white; padding: 30px; border-radius: 30px; border: 3px dashed var(--deep-pink); max-width: 600px; margin: 0 auto;">
+            <textarea id="noteContent" rows="3" style="width:100%; border:1px solid #ddd; padding:15px; border-radius:15px;" placeholder="Tulis pesan rahasia untuk Princess lain..."></textarea>
+            <button class="btn-royal" style="width:100%; margin-top:15px;" onclick="addNote()">Kirim Pesan Kupu-kupu 🦋</button>
+        </div>
+        <div id="sticky-wall" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px;"></div>
+    </div>
+</div>
+
+<footer>
+    <p>And They Lived Happily Ever After... <br> Metdes 2020-2026</p>
+</footer>
+
+<script>
+    // --- FUNGSINYA ---
+    const tasks = [
+        "Sebutkan 1 hal yang paling bikin stress pas kuliah di PENS!",
+        "Siapa yang paling sering telat pas kumpul Metdes?",
+        "Kirim stiker paling lucu ke grup WA sekarang!",
+        "Tiru gaya Salma pas lagi presentasi depan dosen!",
+        "Ceritakan rahasia yang Lala belum tahu!",
+        "Firo harus kasih tips desain singkat sekarang!",
+        "Nyanyi reff lagu Disney favoritmu!"
+    ];
+
+    function rollDice() {
+        const d = document.getElementById('dice');
+        const t = document.getElementById('tod-text');
+        d.style.transform = "rotate(360deg) scale(1.2)";
+        setTimeout(() => {
+            d.style.transform = "rotate(0deg) scale(1)";
+            t.innerText = tasks[Math.floor(Math.random() * tasks.length)];
+        }, 500);
+    }
+
+    function addNote() {
+        const content = document.getElementById('noteContent').value;
+        if (!content) return;
+        const wall = document.getElementById('sticky-wall');
+        const div = document.createElement('div');
+        div.className = "sticky-note";
+        div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 95%)`;
+        div.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+        div.innerHTML = `<p>${content}</p><small>✨ Royal Post</small>`;
+        wall.prepend(div);
+        document.getElementById('noteContent').value = "";
+    }
+
+    function saveCard(id, name) {
+        const card = document.getElementById(id);
+        html2canvas(card).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `Metdes_Princess_${name}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    }
+</script>
+
+</body>
+</html>
