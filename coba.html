@@ -230,46 +230,130 @@
         <button class="btn-magic" onclick="rollDice()">KOCOK DADU!</button>
     </div>
 
-    <h2 class="section-title">Secret Owl Post</h2>
-    <div class="owl-form">
-        <p style="text-align: center;">Kirim pesan ke teman Ippo.</p>
-        <select id="target">
-            <option value="">-- Pilih Teman Ippo --</option>
-            <option value="semsem">Sem Sem</option>
-            <option value="firo">Firo</option>
-            <option value="mbem">Tembem</option>
-            <option value="fafa">Fafa</option>
-            <option value="setar">Setar</option>
-            <option value="raka">Raka</option>
+<h2 class="section-title">The Secret Wall of Ippo</h2>
+<div class="owl-post-container">
+    <p style="text-align: center; font-family: 'Dancing Script'; font-size: 1.5rem;">
+        Tempelkan pesan rahasiamu di dinding ini...
+    </p>
+    
+    <div class="owl-form" style="margin-bottom: 40px;">
+        <select id="noteTarget">
+            <option value="">-- Surat buat siapa? --</option>
+            <option value="Semsem">Semsem</option>
+            <option value="Firo">Firo</option>
+            <option value="Mbem">Mbem</option>
+            <option value="Fafa">Fafa</option>
+            <option value="Setar">Setar</option>
+            <option value="Raka">Raka</option>
+            <option value="Semua Anggota">Semua Anggota</option>
         </select>
-        <textarea id="message" rows="4" placeholder="Tulis kejujuranmu di sini..."></textarea>
-        <button class="btn-magic" style="width: 100%;" onclick="sendOwl()">KIRIM SURAT RAHASIA</button>
+        <textarea id="noteContent" rows="3" placeholder="Tulis pesan jujurmu (Anonim)..."></textarea>
+        <button class="btn-magic" style="width: 100%;" onclick="addNote()">TEMPEL DI DINDING</button>
     </div>
 
+    <div id="sticky-wall" style="
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 20px; 
+        justify-content: center; 
+        min-height: 300px; 
+        padding: 20px; 
+        background: rgba(0,0,0,0.05); 
+        border-radius: 15px;
+        border: 4px double var(--gryffindor);
+    ">
+        </div>
+    
+    <button class="btn-magic" style="margin-top: 20px; background: none; color: var(--gryffindor); border-color: transparent;" onclick="clearWall()">
+        [ Bersihkan Dinding ]
+    </button>
 </div>
 
-<footer>
-    <p>Solemnly Swear That We Are Up To No Good | Ippo Ippo 2017 - 2026</p>
-</footer>
-
 <script>
+    // --- DATABASE NOMOR WA (Tetap Ada) ---
     const waList = {
-        'semsem': '6288226004625',
-        'firo': '6285755485049',
-        'mbem': '6285806643797',
-        'fafa': '6285876701016',
-        'setar': '6287856278427',
-        'raka': '6287872566915'
+        'semsem': '628xxxxxxxxxx',
+        'firo': '628xxxxxxxxxx',
+        'mbem': '628xxxxxxxxxx',
+        'fafa': '628xxxxxxxxxx',
+        'setar': '628xxxxxxxxxx',
+        'raka': '628xxxxxxxxxx'
     };
 
-    function sendOwl() {
-        const t = document.getElementById('target').value;
-        const m = document.getElementById('message').value;
-        if(!t || !m) { alert("Pilih teman & tulis pesan!"); return; }
-        const url = `https://wa.me/${waList[t]}?text=*SURAT RAHASIA DARI ANGGOTA IPPO*%0A%0A"${encodeURIComponent(m)}"%0A%0A_Pesan ini dari website Ippo._`;
-        window.open(url, '_blank');
+    // --- LOGIKA STICKY NOTES (WALL OF SECRETS) ---
+    function addNote() {
+        const target = document.getElementById('noteTarget').value;
+        const content = document.getElementById('noteContent').value;
+        
+        if (!target || !content) {
+            alert("Pilih tujuan dan tulis pesannya, Marauders!");
+            return;
+        }
+
+        const note = {
+            id: Date.now(),
+            to: target,
+            text: content,
+            color: getRandomColor(),
+            rotation: Math.floor(Math.random() * 10) - 5 // Miring acak
+        };
+
+        // Simpan ke LocalStorage
+        let notes = JSON.parse(localStorage.getItem('ippoNotes')) || [];
+        notes.push(note);
+        localStorage.setItem('ippoNotes', JSON.stringify(notes));
+
+        renderNotes();
+        document.getElementById('noteContent').value = ""; // Reset form
     }
 
+    function renderNotes() {
+        const wall = document.getElementById('sticky-wall');
+        const notes = JSON.parse(localStorage.getItem('ippoNotes')) || [];
+        
+        wall.innerHTML = notes.length === 0 ? 
+            '<p style="opacity: 0.5;">Dinding masih kosong... jadilah yang pertama menulis!</p>' : '';
+
+        notes.forEach(n => {
+            const div = document.createElement('div');
+            div.style = `
+                background: ${n.color};
+                width: 180px;
+                min-height: 180px;
+                padding: 15px;
+                box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+                transform: rotate(${n.rotation}deg);
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.2rem;
+                position: relative;
+                border-bottom-right-radius: 20px;
+                display: flex;
+                flex-direction: column;
+            `;
+            div.innerHTML = `
+                <strong style="border-bottom: 1px dashed rgba(0,0,0,0.2); margin-bottom: 10px; font-family: 'Space Mono'; font-size: 0.8rem;">
+                    To: ${n.to}
+                </strong>
+                <p style="margin: 0; flex-grow: 1;">${n.text}</p>
+                <small style="text-align: right; opacity: 0.3; font-size: 0.6rem;">Anonim Post</small>
+            `;
+            wall.appendChild(div);
+        });
+    }
+
+    function getRandomColor() {
+        const colors = ['#fff59d', '#ffcc80', '#81d4fa', '#a5d6a7', '#f48fb1', '#ce93d8'];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function clearWall() {
+        if(confirm("Hapus semua kenangan di dinding ini?")) {
+            localStorage.removeItem('ippoNotes');
+            renderNotes();
+        }
+    }
+
+    // --- TRUTH OR DARE QUESTIONS ---
     const todQuestions = [
         "[Truth] Ceritakan momen SMA 2017 yang paling nggak bisa kamu lupain!",
         "[Truth] Siapa anggota Ippo yang paling banyak berubah (glow up)?",
@@ -291,7 +375,6 @@
         "[Dare] Coba telepon salah satu teman SMA kita yang di luar Ippo secara acak (random) dan tanya 'Apa kabar?' pakai speaker phone!",
         "[Dare] Kasih satu 'gelar' atau 'nama panggung' baru yang paling cocok buat tiap anggota Ippo berdasarkan kehidupan mereka di 2026.",
         "[Dare] Nyanyikan satu lagu yang menurutmu paling menggambarkan persahabatan kita selama hampir 10 tahun ini!"
-        
     ];
 
     function rollDice() {
@@ -319,6 +402,9 @@
             });
         }, 500);
     }
+
+    // Jalankan render saat website dibuka
+    window.onload = renderNotes;
 </script>
 
 </body>
