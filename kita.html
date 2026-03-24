@@ -8,8 +8,89 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@600&family=IM+Fell+DW+Pica&family=Space+Mono&display=swap" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+      // 1. GANTI DENGAN CONFIG KAMU DARI FIREBASE CONSOLE!
+      const firebaseConfig = {
+        apiKey: "AIzaSy...",
+        authDomain: "ippo-ippo.firebaseapp.com",
+        databaseURL: "https://ippo-ippo-default-rtdb.firebaseio.com",
+        projectId: "ippo-ippo",
+        storageBucket: "ippo-ippo.appspot.com",
+        messagingSenderId: "123456789",
+        appId: "1:12345:web:abcde"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const dbRef = ref(db, 'notes');
+
+      // --- LOGIKA KIRIM PESAN KE FIREBASE ---
+      window.addNote = function() {
+          const target = document.getElementById('noteTarget').value;
+          const content = document.getElementById('noteContent').value;
+          
+          if (!target || !content) { alert("Isi dulu suratnya!"); return; }
+
+          push(dbRef, {
+              to: target,
+              text: content,
+              color: ['#fff59d', '#ffcc80', '#81d4fa', '#a5d6a7', '#f48fb1'][Math.floor(Math.random() * 5)],
+              rotation: Math.floor(Math.random() * 10) - 5,
+              timestamp: Date.now()
+          });
+
+          document.getElementById('noteContent').value = "";
+      };
+
+      // --- LOGIKA TERIMA PESAN REALTIME ---
+      onValue(dbRef, (snapshot) => {
+          const wall = document.getElementById('sticky-wall');
+          wall.innerHTML = "";
+          const data = snapshot.val();
+          
+          if (data) {
+              Object.values(data).reverse().forEach(n => {
+                  const div = document.createElement('div');
+                  div.className = "sticky-note";
+                  div.style = `background:${n.color}; transform:rotate(${n.rotation}deg);`;
+                  div.innerHTML = `
+                      <strong>To: ${n.to}</strong>
+                      <p>${n.text}</p>
+                      <small>Owl Post</small>
+                  `;
+                  wall.appendChild(div);
+              });
+          } else {
+              wall.innerHTML = "<p>Belum ada surat rahasia...</p>";
+          }
+      });
+    </script>
 
     <style>
+        :root { --gold: #d4af37; --gryffindor: #740001; --parchment: #f4e4bc; --wizard-dark: #1a1714; }
+        body { margin: 0; background-color: var(--wizard-dark); background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png'); font-family: 'IM Fell DW Pica', serif; }
+        
+        .main-container { max-width: 1200px; margin: 20px auto; padding: 20px; background: url('https://www.transparenttextures.com/patterns/paper.png'), var(--parchment); border-radius: 10px; border: 15px solid transparent; border-image: url('https://www.transparenttextures.com/patterns/ornamental-border.png') 30 stretch; }
+        .section-title { font-family: 'Cinzel Decorative'; text-align: center; color: var(--gryffindor); border-bottom: 2px solid var(--gryffindor); margin: 40px 0; }
+        
+        /* Wall Style */
+        #sticky-wall { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; min-height: 300px; padding: 20px; background: rgba(0,0,0,0.05); border-radius: 15px; }
+        .sticky-note { width: 180px; min-height: 180px; padding: 15px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); font-family: 'Dancing Script'; font-size: 1.2rem; border-bottom-right-radius: 20px; }
+        .sticky-note strong { display: block; font-family: 'Space Mono'; font-size: 0.8rem; border-bottom: 1px dashed rgba(0,0,0,0.1); margin-bottom: 10px; }
+        
+        /* Form & Buttons */
+        .owl-form { max-width: 600px; margin: 0 auto; }
+        select, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid var(--gold); }
+        .btn-magic { background: var(--gryffindor); color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; cursor: pointer; font-family: 'Cinzel Decorative'; }
+        
+        /* Gallery & Cards (Keep original styles here) */
+        .gallery-wrapper { overflow-x: auto; white-space: nowrap; padding: 20px; }
+        .polaroid { display: inline-block; background: white; padding: 10px; margin: 10px; transform: rotate(-2deg); }
+        .polaroid img { width: 200px; height: 150px; object-fit: cover; }
+
         :root {
             --gold: #d4af37;
             --gryffindor: #740001;
