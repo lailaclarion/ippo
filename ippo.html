@@ -266,7 +266,7 @@
         const t = document.getElementById('target').value;
         const m = document.getElementById('message').value;
         if(!t || !m) { alert("Pilih teman & tulis pesan!"); return; }
-        const url = `https://wa.me/${waList[t]}?text=*SURAT RAHASIA DARI ANGGOTA IPPO*%0A%0A"${encodeURIComponent(m)}"%0A%0A_Pesan ini anonim dari website Ippo._`;
+        const url = `https://wa.me/${waList[t]}?text=*SURAT RAHASIA DARI ANGGOTA IPPO*%0A%0A"${encodeURIComponent(m)}"%0A%0A_Pesan ini dari website Ippo._`;
         window.open(url, '_blank');
     }
 
